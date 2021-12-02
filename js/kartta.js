@@ -45,16 +45,25 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+let circle; //Circle to show bounds
+
+
 //Start search
 navigator.geolocation.getCurrentPosition(success, error);
 
 //If position is found
 function success(pos){
     const crd = pos.coords;
+    //Create a circle to check for places near the current location
+    circle = L.circle([crd.latitude, crd.longitude], {radius: 1000}).addTo(map);
+    //Create marker for current position
+    createMarkers(crd.latitude, crd.longitude, 'Olet tässä');
     getActivities(crd.latitude, crd.longitude);
     map.setView([crd.latitude, crd.longitude], 12); //Center map to user position
 
-    createMarkers(crd.latitude, crd.longitude, 'Olet tässä');
+    //Get bounds of the circle if you want to zoom in on the position
+    //let bounds = circle.getBounds();
+    //map.fitBounds(bounds);
 }
 
 //If position is not found
@@ -74,16 +83,8 @@ function getActivities(latitude, longitude){
         .then ((locationsData)=> {
             let parsedData = JSON.parse(locationsData.contents); //Parse incoming data
             console.log(parsedData); //Console log parsed data
-            //console.log(parsedData.data[0].id);
-
-            //Testimarkkeri
-            /*
-            const latitude = parsedData.data[0].location.lat;
-            const longitude = parsedData.data[0].location.lon;
-            */
 
             for(let i = 0; i < parsedData.data.length; i++){
-
                 //Get location
                 const {
                     lat,
@@ -95,20 +96,32 @@ function getActivities(latitude, longitude){
                     fi,
                 } = parsedData.data[i].name;
 
+                //Get address
                 const {
                     street_address,
                 } = parsedData.data[i].location.address;
 
+                //Osoitetta ei kannattane syöttää lopullisessa versiossa createMarkers-funktioon.
+                //Muutetaan datavirtaa sitten sen mukaan, mihin sitä halutaan syöttää.
                 createMarkers(lat, lon, fi, street_address);
             }
-
-
         });
 }
 
 //Generate markers and current position
 function createMarkers (latitude, longitude, title, street_address){
-    L.marker([latitude, longitude]).
-        addTo(map).
-        bindPopup(`${title} ${street_address}`);
+    //Get current marker position
+    let markerPos = L.marker([latitude, longitude]).getLatLng();
+    //Check if current marker is within the circle
+    let distanceFromCircle = map.distance(markerPos, circle.getLatLng());
+    //True if within
+    let isInside = distanceFromCircle < circle.getRadius();
+
+    if(isInside)
+    {
+        console.log('Success');
+        let mark = L.marker([latitude, longitude]).
+            addTo(map).
+            bindPopup(`${title} ${street_address}`);
+    }
 }

@@ -71,14 +71,14 @@ function getActivities(latitude, longitude){
         .then(response => response.json())
         .then ((locationsData)=> {
            // console.log('locationsData', locationsData.contents); //Nyt tulee dataa, muttei arrayna hmm pitää saada vaan se dataosuus
-            let newdata = JSON.parse(locationsData.contents); //Uuuh var :D Joskus sitä on pakko käyttää :D copupastasin vaa koodia jostian 2016 vuodelta
+            let parsedData = JSON.parse(locationsData.contents); //Uuuh var :D Joskus sitä on pakko käyttää :D copupastasin vaa koodia jostian 2016 vuodelta
             //koodi vuodelta 2016 saves the day! Nyt on nättinä data.
-            console.log(newdata);
-            console.log(newdata.data[0].id); //NYT TOIMII
+            console.log(parsedData);
+            console.log(parsedData.data[0].id); //NYT TOIMII
 
             //Testimarkkeri
-            const latitude = newdata.data[0].location.lat;
-            const longitude = newdata.data[0].location.lon;
+            const latitude = parsedData.data[0].location.lat;
+            const longitude = parsedData.data[0].location.lon;
 
             createMarkers(latitude, longitude, 'Testimarkkeri');
         });

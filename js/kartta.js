@@ -64,29 +64,51 @@ function error(err){
 
 //Get activity locations
 function getActivities(latitude, longitude){
-    const myHelsinkiAddress = baseURLMyHelsinki + tagSearch; //Concatenated MyHelsinki address
-    const query = `https://api.allorigins.win/get?url=${encodeURIComponent(myHelsinkiAddress)}`; //Cort proxy query address
+    //Concatenated MyHelsinki address
+    const myHelsinkiAddress = baseURLMyHelsinki + tagSearch;
+    //Cort proxy query address
+    const query = `https://api.allorigins.win/get?url=${encodeURIComponent(myHelsinkiAddress)}`; 
 
     fetch(query)
         .then(response => response.json())
         .then ((locationsData)=> {
-           // console.log('locationsData', locationsData.contents); //Nyt tulee dataa, muttei arrayna hmm pitää saada vaan se dataosuus
-            let parsedData = JSON.parse(locationsData.contents); //Uuuh var :D Joskus sitä on pakko käyttää :D copupastasin vaa koodia jostian 2016 vuodelta
-            //koodi vuodelta 2016 saves the day! Nyt on nättinä data.
-            console.log(parsedData);
-            console.log(parsedData.data[0].id); //NYT TOIMII
+            let parsedData = JSON.parse(locationsData.contents); //Parse incoming data
+            console.log(parsedData); //Console log parsed data
+            //console.log(parsedData.data[0].id);
 
             //Testimarkkeri
+            /*
             const latitude = parsedData.data[0].location.lat;
             const longitude = parsedData.data[0].location.lon;
+            */
 
-            createMarkers(latitude, longitude, 'Testimarkkeri');
+            for(let i = 0; i < parsedData.data.length; i++){
+
+                //Get location
+                const {
+                    lat,
+                    lon,
+                } = parsedData.data[i].location;
+
+                //Get name
+                const {
+                    fi,
+                } = parsedData.data[i].name;
+
+                const {
+                    street_address,
+                } = parsedData.data[i].location.address;
+
+                createMarkers(lat, lon, fi, street_address);
+            }
+
+
         });
 }
 
 //Generate markers and current position
-function createMarkers (latitude, longitude, teksti){
+function createMarkers (latitude, longitude, title, street_address){
     L.marker([latitude, longitude]).
         addTo(map).
-        bindPopup(teksti);
+        bindPopup(`${title} ${street_address}`);
 }

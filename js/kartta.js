@@ -76,7 +76,7 @@ function getActivities(latitude, longitude){
     //Concatenated MyHelsinki address
     const myHelsinkiAddress = baseURLMyHelsinki + tagSearch;
     //Cort proxy query address
-    const query = `https://api.allorigins.win/get?url=${encodeURIComponent(myHelsinkiAddress)}`; 
+    const query = `https://api.allorigins.win/get?url=${encodeURIComponent(myHelsinkiAddress)}`;
 
     fetch(query)
         .then(response => response.json())
@@ -125,3 +125,9 @@ function createMarkers (latitude, longitude, title, street_address){
             bindPopup(`${title} ${street_address}`);
     }
 }
+
+//navigaation siirto
+
+//L.map('map', { zoomControl: false });
+L.mapbox.map('map', { zoomControl: false });
+L.control.zoom({ position: 'bottomright' }).addTo(map);

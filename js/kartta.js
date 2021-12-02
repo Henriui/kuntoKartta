@@ -34,7 +34,12 @@ Lisää ko. muuttuja haun eteen: `fetch(${proxy}https://open-api.myhelsinki.fi/j
 const baseURLMyHelsinki = 'https://open-api.myhelsinki.fi/'; //MyHelsinki BaseURL
 const tagSearch = 'v2/places/?tags_search=sports'; //MyHelsinki tag_search term
 
-const map = L.map('map').setView([60.22, 24], 12);
+//luodaan kartta.
+const map = L.map('map',{
+    center: [60.22, 24], zoom:12,zoomControl:false
+});
+//navigaation siirto ala-oikealle
+L.control.zoom({ position: 'bottomright' }).addTo(map);
 
 //Poista, kun projekti on valmis
 //const proxy = 'gobetween.oklabs.org/pipe/';
@@ -125,9 +130,3 @@ function createMarkers (latitude, longitude, title, street_address){
             bindPopup(`${title} ${street_address}`);
     }
 }
-
-//navigaation siirto
-
-//L.map('map', { zoomControl: false });
-L.mapbox.map('map', { zoomControl: false });
-L.control.zoom({ position: 'bottomright' }).addTo(map);

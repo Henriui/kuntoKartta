@@ -1,3 +1,7 @@
+/*
+Yleinen tyyli
+ */
+
 header{
     height: 10%;
 }
@@ -12,6 +16,9 @@ body{
 main{
 
 }
+/*
+Kartan CSS
+ */
 
 #map {
     position: absolute;
@@ -19,7 +26,9 @@ main{
     height: 100%;
 
 }
-
+/*
+Sivupainike ja sen menu
+ */
 .sidenav {
     height: 100%;
     width: 0;
@@ -27,7 +36,7 @@ main{
     z-index: 5000;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: rgba(0, 0, 0, 0.9);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -37,7 +46,7 @@ main{
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #ffffff;
     display: block;
     transition: 0.3s;
 }
@@ -52,4 +61,13 @@ main{
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+}
+
+.opennav {
+    margin: 15px 15px 15px 15px;
+    font-size:30px;
+    cursor:pointer;
+    width: 50%;
+    z-index: 3000;
+    position: fixed;
 }

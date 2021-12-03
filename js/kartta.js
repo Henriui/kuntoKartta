@@ -33,6 +33,7 @@ Lisää ko. muuttuja haun eteen: `fetch(${proxy}https://open-api.myhelsinki.fi/j
 
 const baseURLMyHelsinki = 'https://open-api.myhelsinki.fi/'; //MyHelsinki BaseURL
 const tagSearch = 'v2/places/?tags_search=sports'; //MyHelsinki tag_search term
+let userLocation = []; //User location
 
 //luodaan kartta.
 const map = L.map('map',{
@@ -53,6 +54,26 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let circle; //Circle to show bounds
 let circleRadius = 2000; //Radius in meters.
 
+//Create routing controls
+let routingControl = L.Routing.control({
+        waypoints: [
+            L.latLng(),
+            L.latLng()
+        ],
+        lineOptions: {
+            addWaypoints: false,
+            draggableWaypoints: false
+        }
+    }).addTo(map);
+
+//Update route when a marker is clicked
+let updateRoute = function(toPos){
+    routingControl.getPlan().setWaypoints([
+        L.latLng(userLocation),
+        L.latLng(toPos)
+    ]);
+};
+
 
 //Start search
 navigator.geolocation.getCurrentPosition(success, error);
@@ -64,21 +85,13 @@ function success(pos){
     circle = L.circle([crd.latitude, crd.longitude], {radius: circleRadius}).addTo(map);
     //Create marker for current position
     createMarkers(crd.latitude, crd.longitude, 'Olet tässä');
+    userLocation = [crd.latitude, crd.longitude]; //Save user location
     getActivities(crd.latitude, crd.longitude);
     map.setView([crd.latitude, crd.longitude], 12); //Center map to user position
 
     //Get bounds of the circle if you want to zoom in on the position
     //let bounds = circle.getBounds();
     //map.fitBounds(bounds);
-
-    //Get routing directions => Omaan onClick-funktioon.
-    L.Routing.control({
-        waypoints: [
-            L.latLng(crd.latitude, crd.longitude),
-            L.latLng(57.6792, 11.949)
-        ],
-        routeWhileDragging: true
-    }).addTo(map);
 }
 
 //If position is not found
@@ -137,6 +150,9 @@ function createMarkers (latitude, longitude, title, street_address){
         console.log('Success');
         let mark = L.marker([latitude, longitude]).
             addTo(map).
-            bindPopup(`${title} ${street_address}`);
+            on('click', function() { updateRoute(markerPos); }).
+            bindPopup(`${title} ${street_address}`).
+            dragging.disable();
     }
 }
+

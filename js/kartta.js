@@ -70,6 +70,15 @@ function success(pos){
     //Get bounds of the circle if you want to zoom in on the position
     //let bounds = circle.getBounds();
     //map.fitBounds(bounds);
+
+    //Get routing directions => Omaan onClick-funktioon.
+    L.Routing.control({
+        waypoints: [
+            L.latLng(crd.latitude, crd.longitude),
+            L.latLng(57.6792, 11.949)
+        ],
+        routeWhileDragging: true
+    }).addTo(map);
 }
 
 //If position is not found

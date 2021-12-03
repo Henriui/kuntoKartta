@@ -51,6 +51,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let circle; //Circle to show bounds
+let circleRadius = 2000; //Radius in meters.
 
 
 //Start search
@@ -60,7 +61,7 @@ navigator.geolocation.getCurrentPosition(success, error);
 function success(pos){
     const crd = pos.coords;
     //Create a circle to check for places near the current location
-    circle = L.circle([crd.latitude, crd.longitude], {radius: 1000}).addTo(map);
+    circle = L.circle([crd.latitude, crd.longitude], {radius: circleRadius}).addTo(map);
     //Create marker for current position
     createMarkers(crd.latitude, crd.longitude, 'Olet tässä');
     getActivities(crd.latitude, crd.longitude);

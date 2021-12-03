@@ -64,10 +64,16 @@ Sivupainike ja sen menu
 }
 
 .opennav {
-    margin: 15px 15px 15px 15px;
+
     font-size:30px;
     cursor:pointer;
-    width: 50%;
+    width: 14%;
     z-index: 3000;
+
+}
+.navdiv{
+    margin: 15px 15px 15px 15px;
     position: fixed;
+    width: 14%;
+    z-index: 3000;
 }

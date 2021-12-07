@@ -34,8 +34,7 @@ Lisää ko. muuttuja haun eteen: `fetch(${proxy}https://open-api.myhelsinki.fi/j
 const baseURLMyHelsinki = 'https://open-api.myhelsinki.fi/'; //MyHelsinki BaseURL
 const tagSearch = 'v2/places/?tags_search=sports'; //MyHelsinki tag_search term
 let userLocation = []; //User location
-const searchButton = document.querySelector('#searchButton'); //Search button
-const searchField = document.querySelector('#searchField'); //Search field
+
 
 //luodaan kartta.
 const map = L.map('map',{
@@ -76,13 +75,37 @@ let updateRoute = function(toPos){
         L.latLng(toPos)
     ]);
 };
+/*--------------------------------------------------------------------------------*/
+//Change radius of searchfield
 
+const searchButton = document.querySelector('#searchButton'); //Search button
+const searchField = document.querySelector('#searchField'); //Search field
+
+
+/*
 //Change search area radius according to user input
 searchButton.addEventListener('click', function(){
     circleRadius = searchField.value; //Give circle a new radius
     markerGroup.clearLayers(); //Clear all markers
     navigator.geolocation.getCurrentPosition(success, error); //Start search
 })
+*/
+let timer;              // Timer identifier
+const waitTime = 600;   // Wait time in milliseconds
+const input = document.querySelector('#searchField');
+input.addEventListener('keyup', (e) => {
+
+    // Clear timer
+    clearTimeout(timer);
+
+    // Wait for X ms and then process the request
+    timer = setTimeout(() => {
+        circleRadius = searchField.value; //Give circle a new radius
+        markerGroup.clearLayers(); //Clear all markers
+        navigator.geolocation.getCurrentPosition(success, error); //Start search
+    }, waitTime);
+});
+
 
 //Start search
 navigator.geolocation.getCurrentPosition(success, error);
@@ -120,8 +143,12 @@ function error(err){
 
 
 
-//Get activity locations (from myHelsinki)
 
+
+
+/*--------------------------------------------------------------------------------*/
+//Get activity locations (from myHelsinki)
+/*--------------------------------------------------------------------------------*/
 
 
 function getActivities(){
@@ -153,28 +180,9 @@ function getActivities(){
         });
 }
 
-//Generate markers and current position
-function createMarkers (latitude, longitude, title, street_address){
-    //Get current marker position
-    let markerPos = L.marker([latitude, longitude]).getLatLng();
-    //Check if current marker is within the circle
-    let distanceFromCircle = map.distance(markerPos, circle.getLatLng());
-    //True if within
-    let isInside = distanceFromCircle < circle.getRadius();
-
-    if(isInside)
-    {
-        console.log('Success');
-        let mark = L.marker([latitude, longitude])
-            .addTo(markerGroup)
-            .addTo(map)
-            .on('click', function() { updateRoute(markerPos); })
-            .bindPopup(`${title} ${"<br>"} ${street_address}`)
-            .dragging.disable();
-    }
-}
-
-//Fetch HRI data and parse to json
+/*--------------------------------------------------------------------------------*/
+//Get activity locations from HRI
+/*--------------------------------------------------------------------------------*/
 
 function hriNouto() {
     const helfi = "https://www.hel.fi/palvelukarttaws/rest/v4/unit/?search=liikunta+helsinki";
@@ -209,4 +217,28 @@ function hriNouto() {
             }
 
         });
+}
+
+
+
+//Generate markers and current position
+function createMarkers (latitude, longitude, title, street_address){
+    //Get current marker position
+    let markerPos = L.marker([latitude, longitude]).getLatLng();
+    //Check if current marker is within the circle
+    let distanceFromCircle = map.distance(markerPos, circle.getLatLng());
+    //True if within
+    let isInside = distanceFromCircle < circle.getRadius();
+
+    if(isInside)
+    {
+        console.log('Success');
+        // noinspection JSVoidFunctionReturnValueUsed
+        let mark = L.marker([latitude, longitude])
+            .addTo(markerGroup)
+            .addTo(map)
+            .on('click', function() { updateRoute(markerPos); })
+            .bindPopup(`${title} ${"<br>"} ${street_address}`)
+            .dragging.disable();
+    }
 }

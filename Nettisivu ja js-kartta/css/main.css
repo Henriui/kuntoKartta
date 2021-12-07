@@ -24,17 +24,6 @@
 		font-family: 'Rubik', sans-serif;
 	}
 
-#searchField {
-	display: block;
-	margin: auto;
-	padding: 8px 8px 8px 8px;
-}
-
-#searchButton {
-	display: block;
-	margin: 0px 0px 0px 38px;
-	padding: 8px 8px 8px 8px;
-}
 
 ul {
 	margin: 0;

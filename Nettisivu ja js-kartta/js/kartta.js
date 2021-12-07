@@ -34,6 +34,8 @@ Lisää ko. muuttuja haun eteen: `fetch(${proxy}https://open-api.myhelsinki.fi/j
 const baseURLMyHelsinki = 'https://open-api.myhelsinki.fi/'; //MyHelsinki BaseURL
 const tagSearch = 'v2/places/?tags_search=sports'; //MyHelsinki tag_search term
 let userLocation = []; //User location
+const searchButton = document.querySelector('#searchButton'); //Search button
+const searchField = document.querySelector('#searchField'); //Search field
 
 //luodaan kartta.
 const map = L.map('map',{
@@ -53,6 +55,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 let circle; //Circle to show bounds
 let circleRadius = 2000; //Radius in meters.
+let markerGroup = L.layerGroup().addTo(map); //Marker group
 
 //Create routing controls
 let routingControl = L.Routing.control({
@@ -74,6 +77,12 @@ let updateRoute = function(toPos){
     ]);
 };
 
+//Change search area radius according to user input
+searchButton.addEventListener('click', function(){
+    circleRadius = searchField.value; //Give circle a new radius
+    markerGroup.clearLayers(); //Clear all markers
+    navigator.geolocation.getCurrentPosition(success, error); //Start search
+})
 
 //Start search
 navigator.geolocation.getCurrentPosition(success, error);
@@ -81,8 +90,15 @@ navigator.geolocation.getCurrentPosition(success, error);
 //If position is found
 function success(pos){
     const crd = pos.coords;
+
+    //If circle size if redefined by the user, remove current circle
+    if(circle != undefined)
+    {
+        map.removeLayer(circle);
+    }
     //Create a circle to check for places near the current location
     circle = L.circle([crd.latitude, crd.longitude], {radius: circleRadius}).addTo(map);
+
     //Create marker for current position
     createMarkers(crd.latitude, crd.longitude, 'Olet tässä');
     userLocation = [crd.latitude, crd.longitude]; //Save user location
@@ -149,6 +165,7 @@ function createMarkers (latitude, longitude, title, street_address){
     {
         console.log('Success');
         let mark = L.marker([latitude, longitude]).
+            addTo(markerGroup).
             addTo(map).
             on('click', function() { updateRoute(markerPos); }).
             bindPopup(`${title} ${street_address}`).

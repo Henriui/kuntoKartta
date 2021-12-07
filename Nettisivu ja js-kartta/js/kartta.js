@@ -102,12 +102,14 @@ function success(pos){
     //Create marker for current position
     createMarkers(crd.latitude, crd.longitude, 'Olet tässä');
     userLocation = [crd.latitude, crd.longitude]; //Save user location
-    getActivities(crd.latitude, crd.longitude);
+    getActivities();
     map.setView([crd.latitude, crd.longitude], 12); //Center map to user position
 
     //Get bounds of the circle if you want to zoom in on the position
     //let bounds = circle.getBounds();
     //map.fitBounds(bounds);
+
+    hriNouto(crd.latitude, crd.longitude);
 }
 
 //If position is not found
@@ -115,8 +117,14 @@ function error(err){
     console.warn(`Error`);
 }
 
-//Get activity locations
-function getActivities(latitude, longitude){
+
+
+
+//Get activity locations (from myHelsinki)
+
+
+
+function getActivities(){
     //Concatenated MyHelsinki address
     const myHelsinkiAddress = baseURLMyHelsinki + tagSearch;
     //Cort proxy query address
@@ -130,20 +138,13 @@ function getActivities(latitude, longitude){
 
             for(let i = 0; i < parsedData.data.length; i++){
                 //Get location
-                const {
-                    lat,
-                    lon,
-                } = parsedData.data[i].location;
+                const {lat, lon,} = parsedData.data[i].location;
 
                 //Get name
-                const {
-                    fi,
-                } = parsedData.data[i].name;
+                const {fi,} = parsedData.data[i].name;
 
                 //Get address
-                const {
-                    street_address,
-                } = parsedData.data[i].location.address;
+                const {street_address,} = parsedData.data[i].location.address;
 
                 //Osoitetta ei kannattane syöttää lopullisessa versiossa createMarkers-funktioon.
                 //Muutetaan datavirtaa sitten sen mukaan, mihin sitä halutaan syöttää.
@@ -164,12 +165,48 @@ function createMarkers (latitude, longitude, title, street_address){
     if(isInside)
     {
         console.log('Success');
-        let mark = L.marker([latitude, longitude]).
-            addTo(markerGroup).
-            addTo(map).
-            on('click', function() { updateRoute(markerPos); }).
-            bindPopup(`${title} ${street_address}`).
-            dragging.disable();
+        let mark = L.marker([latitude, longitude])
+            .addTo(markerGroup)
+            .addTo(map)
+            .on('click', function() { updateRoute(markerPos); })
+            .bindPopup(`${title} ${"<br>"} ${street_address}`)
+            .dragging.disable();
     }
 }
 
+//Fetch HRI data and parse to json
+
+function hriNouto() {
+    const helfi = "https://www.hel.fi/palvelukarttaws/rest/v4/unit/?search=liikunta+helsinki";
+    const query = `https://api.allorigins.win/get?url=${encodeURIComponent(helfi)}`;
+    fetch(query)
+        .then(response => response.json())
+        .then((hriraw) => {
+            let hriPar = JSON.parse(hriraw.contents);
+            console.log(hriPar);
+            try{
+                for (let i=0; i<hriPar.length; i++) {
+                    if(hriPar[i].latitude != null || hriPar[i].longitude != null){
+
+
+                    let latlon = [];
+                    latlon.lat = hriPar[i].latitude;
+                    latlon.lon = hriPar[i].longitude;
+
+                    let {lat, lon} = latlon;
+
+
+                    const name = hriPar[i].name_fi;
+                    //console.log(hriPar[i].name_fi);
+                        const address = hriPar[i].street_address_fi;
+
+                    createMarkers(lat, lon, name, address);
+                    }
+                 }
+            }
+            catch (err){
+                console.log("error with latlong");
+            }
+
+        });
+}

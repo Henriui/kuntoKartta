@@ -78,6 +78,7 @@ Sivupainike ja sen menu
     display: inherit;
     margin:auto;
     color:white;
+    text-align: center;
 }
 
 #searchField {

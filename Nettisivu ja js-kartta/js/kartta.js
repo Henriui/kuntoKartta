@@ -34,8 +34,7 @@ Lisää ko. muuttuja haun eteen: `fetch(${proxy}https://open-api.myhelsinki.fi/j
 const baseURLMyHelsinki = 'https://open-api.myhelsinki.fi/'; //MyHelsinki BaseURL
 const tagSearch = 'v2/places/?tags_search=sports'; //MyHelsinki tag_search term
 let userLocation = []; //User location
-const searchButton = document.querySelector('#searchButton'); //Search button
-const searchField = document.querySelector('#searchField'); //Search field
+
 
 //luodaan kartta.
 const map = L.map('map',{
@@ -59,15 +58,15 @@ let markerGroup = L.layerGroup().addTo(map); //Marker group
 
 //Create routing controls
 let routingControl = L.Routing.control({
-        waypoints: [
-            L.latLng(),
-            L.latLng()
-        ],
-        lineOptions: {
-            addWaypoints: false,
-            draggableWaypoints: false
-        }
-    }).addTo(map);
+    waypoints: [
+        L.latLng(),
+        L.latLng()
+    ],
+    lineOptions: {
+        addWaypoints: false,
+        draggableWaypoints: false
+    }
+}).addTo(map);
 
 //Update route when a marker is clicked
 let updateRoute = function(toPos){
@@ -76,13 +75,33 @@ let updateRoute = function(toPos){
         L.latLng(toPos)
     ]);
 };
+/*--------------------------------------------------------------------------------*/
+//Change radius of searchfield
 
+/*
 //Change search area radius according to user input
 searchButton.addEventListener('click', function(){
     circleRadius = searchField.value; //Give circle a new radius
     markerGroup.clearLayers(); //Clear all markers
     navigator.geolocation.getCurrentPosition(success, error); //Start search
 })
+*/
+let timer;              // Timer identifier
+const waitTime = 600;   // Wait time in milliseconds
+const input = document.querySelector('#searchField');
+input.addEventListener('keyup', (e) => {
+
+    // Clear timer
+    clearTimeout(timer);
+
+    // Wait for X ms and then process the request
+    timer = setTimeout(() => {
+        circleRadius = searchField.value; //Give circle a new radius
+        markerGroup.clearLayers(); //Clear all markers
+        navigator.geolocation.getCurrentPosition(success, error); //Start search
+    }, waitTime);
+});
+
 
 //Start search
 navigator.geolocation.getCurrentPosition(success, error);
@@ -102,12 +121,14 @@ function success(pos){
     //Create marker for current position
     createMarkers(crd.latitude, crd.longitude, 'Olet tässä');
     userLocation = [crd.latitude, crd.longitude]; //Save user location
-    getActivities(crd.latitude, crd.longitude);
+    getActivities();
     map.setView([crd.latitude, crd.longitude], 12); //Center map to user position
 
     //Get bounds of the circle if you want to zoom in on the position
     //let bounds = circle.getBounds();
     //map.fitBounds(bounds);
+
+    hriNouto(crd.latitude, crd.longitude);
 }
 
 //If position is not found
@@ -115,42 +136,86 @@ function error(err){
     console.warn(`Error`);
 }
 
-//Get activity locations
-function getActivities(latitude, longitude){
+
+
+
+
+
+
+/*--------------------------------------------------------------------------------*/
+//Get activity locations (from myHelsinki)
+/*--------------------------------------------------------------------------------*/
+
+
+function getActivities(){
     //Concatenated MyHelsinki address
     const myHelsinkiAddress = baseURLMyHelsinki + tagSearch;
     //Cort proxy query address
     const query = `https://api.allorigins.win/get?url=${encodeURIComponent(myHelsinkiAddress)}`;
 
     fetch(query)
-        .then(response => response.json())
-        .then ((locationsData)=> {
-            let parsedData = JSON.parse(locationsData.contents); //Parse incoming data
-            console.log(parsedData); //Console log parsed data
+    .then(response => response.json())
+    .then ((locationsData)=> {
+        let parsedData = JSON.parse(locationsData.contents); //Parse incoming data
+        console.log(parsedData); //Console log parsed data
 
-            for(let i = 0; i < parsedData.data.length; i++){
-                //Get location
-                const {
-                    lat,
-                    lon,
-                } = parsedData.data[i].location;
+        for(let i = 0; i < parsedData.data.length; i++){
+            //Get location
+            const {lat, lon,} = parsedData.data[i].location;
 
-                //Get name
-                const {
-                    fi,
-                } = parsedData.data[i].name;
+            //Get name
+            const {fi,} = parsedData.data[i].name;
 
-                //Get address
-                const {
-                    street_address,
-                } = parsedData.data[i].location.address;
+            //Get address
+            const {street_address,} = parsedData.data[i].location.address;
 
-                //Osoitetta ei kannattane syöttää lopullisessa versiossa createMarkers-funktioon.
-                //Muutetaan datavirtaa sitten sen mukaan, mihin sitä halutaan syöttää.
-                createMarkers(lat, lon, fi, street_address);
-            }
-        });
+            //Osoitetta ei kannattane syöttää lopullisessa versiossa createMarkers-funktioon.
+            //Muutetaan datavirtaa sitten sen mukaan, mihin sitä halutaan syöttää.
+            createMarkers(lat, lon, fi, street_address);
+        }
+    });
 }
+
+/*--------------------------------------------------------------------------------*/
+//Get activity locations from HRI
+/*--------------------------------------------------------------------------------*/
+
+function hriNouto() {
+    const helfi = "https://www.hel.fi/palvelukarttaws/rest/v4/unit/?search=liikunta+helsinki";
+    const query = `https://api.allorigins.win/get?url=${encodeURIComponent(helfi)}`;
+    fetch(query)
+    .then(response => response.json())
+    .then((hriraw) => {
+        let hriPar = JSON.parse(hriraw.contents);
+        console.log(hriPar);
+        try{
+            for (let i=0; i<hriPar.length; i++) {
+                if(hriPar[i].latitude != null || hriPar[i].longitude != null){
+
+
+                    let latlon = [];
+                    latlon.lat = hriPar[i].latitude;
+                    latlon.lon = hriPar[i].longitude;
+
+                    let {lat, lon} = latlon;
+
+
+                    const name = hriPar[i].name_fi;
+                    //console.log(hriPar[i].name_fi);
+                    const address = hriPar[i].street_address_fi;
+
+                    createMarkers(lat, lon, name, address);
+                }
+            }
+        }
+        catch (err){
+            console.log("error with latlong");
+        }
+
+    });
+}
+
+
 
 //Generate markers and current position
 function createMarkers (latitude, longitude, title, street_address){
@@ -164,12 +229,12 @@ function createMarkers (latitude, longitude, title, street_address){
     if(isInside)
     {
         console.log('Success');
-        let mark = L.marker([latitude, longitude]).
-            addTo(markerGroup).
-            addTo(map).
-            on('click', function() { updateRoute(markerPos); }).
-            bindPopup(`${title} ${street_address}`).
-            dragging.disable();
+        // noinspection JSVoidFunctionReturnValueUsed
+        let mark = L.marker([latitude, longitude])
+        .addTo(markerGroup)
+        .addTo(map)
+        .on('click', function() { updateRoute(markerPos); })
+        .bindPopup(`${title} ${"<br>"} ${street_address}`)
+        .dragging.disable();
     }
 }
-

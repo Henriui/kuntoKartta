@@ -5,6 +5,7 @@
 		font-size: 14pt;
 		font-weight: 300;
 		line-height: 1.60em;
+		margin: 0;
 
 	}
 
@@ -24,17 +25,6 @@
 		font-family: 'Rubik', sans-serif;
 	}
 
-#searchField {
-	display: block;
-	margin: auto;
-	padding: 8px 8px 8px 8px;
-}
-
-#searchButton {
-	display: block;
-	margin: 0px 0px 0px 38px;
-	padding: 8px 8px 8px 8px;
-}
 
 ul {
 	margin: 0;
@@ -234,7 +224,7 @@ nav:after {
 /* Banner */
 
 	header {
-		background-image: url("/images/banner.jpg");
+		background-image: url("../images/banner.jpg");
 		background-position: center;
 		background-size: cover;
 		height: 27em;

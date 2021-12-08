@@ -2,19 +2,18 @@
 Yleinen tyyli
  */
 
-header{
-    height: 10%;
-}
+
 footer{
     height: 0%;
 }
 
 body{
+    font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
     background: gray;
 }
 main{
-
+    white-space: nowrap;
 }
 /*
 Kartan CSS
@@ -23,13 +22,14 @@ Kartan CSS
 #map {
     position: absolute;
     width: 100%;
-    height: 90%;
+    height: 100%;
 
 }
 /*
 Sivupainike ja sen menu
  */
 .sidenav {
+    display: inline-block;
     height: 100%;
     width: 0;
     position: fixed;
@@ -38,21 +38,18 @@ Sivupainike ja sen menu
     left: 0;
     background-color: rgba(0, 0, 0, 0.9);
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: 0.3s;
     padding-top: 60px;
 }
 
 .sidenav a {
+    white-space: nowrap;
+    display: block;
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
     color: #ffffff;
-    display: block;
     transition: 0.3s;
-}
-
-.sidenav a:hover {
-    color: #f1f1f1;
 }
 
 .sidenav .closebtn {
@@ -74,6 +71,32 @@ Sivupainike ja sen menu
 .navdiv{
     margin: 15px 15px 15px 15px;
     position: fixed;
-    width: 14%;
     z-index: 3000;
+}
+
+.sidenavtxt{
+    display: inherit;
+    margin:auto;
+    color:white;
+    text-align: center;
+}
+
+#searchField {
+    display: block;
+    margin:auto;
+    padding: 8px 8px 8px 8px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+#searchButton {
+    display: block;
+    margin: 0px 0px 0px 38px;
+    padding: 8px 8px 8px 8px;
+}
+#search{
+    display: block;
+    position: absolute;
+    bottom: 10%;
+    margin: 32px;
 }

@@ -6,6 +6,8 @@
 		<meta charset="utf-8" />
 		<link href="https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/lightbox.css" />
+		<script src="js/jquery.js"></script>
 	</head>
 	<body>
 			<nav>
@@ -36,16 +38,17 @@
 									<img src="images/pic02.jpg" alt="" class="image left"/>
 									<section class="row3-text">
 										<h3>Ulkoliikunta</h3>
-										<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
+										<p>Mikä sen parempaa kuin raitis ulkoilma. Löydä rohkeasti oma tapasi liikkua.</p>
 									</section>
 								</section>
 							</section>
 
 							<section class="row3">
 								<section class="row3-img">
-									<img src="images/pic02.jpg" alt="" class="image left"/>
+									<!-- Image from pexels.com. Photo Guduru Ajay bhargav -->
+									<img src="images/swim.jpg" alt="" class="image left"/>
 									<section class="row3-text">
-										<h3>Uimapaikat tai muuta</h3>
+										<h3>Uimapaikat</h3>
 										<p>Miksi hikoilla kastuakseen, jos voi kastua ihan muutenkin? Uiminen on sopiva liikuntamuoto myös iäkkäämmille liikkujille.</p>
 									</section>
 								</section>
@@ -58,7 +61,7 @@
 									<img src="images/pic02.jpg" alt="" class="image left"/>
 									<section class="row3-text">
 										<h3>Muut liikuntapaikat</h3>
-										<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
+										<p>Liikkua voi yllättävissäkin paikoissa. Ota riski ja ota suunnaksi satunnainen piste kartalta.</p>
 									</section>
 								</section>
 							</section>
@@ -102,16 +105,27 @@
 							<section class="row2">
 								<h3 id="footertitle2">Tekijät</h3>
 								<figure>
-								<img src="images/gavril_small.png" class="imgDevelopers" alt="Gavril Tschokkinen"><a href="info.html">
+									<a href="images/gavril_small.png" data-lightbox="Gavril Tschokkinen" data-title="Gavril Tschokkinen">
+										<img src="images/gavril_small.png" class="imgDevelopers" alt="Gavril Tschokkinen" />
+									</a>
+									<a href="info.html">
 								<figcaption>Gavril Tschokkinen</figcaption></a></figure>
 								<figure>
-								<img src="images/henri_small.png" class="imgDevelopers" alt="Henri Uimonen"><a href="info.html">
+									<a href="images/henri_small.png" data-lightbox="Henri Uimonen" data-title="Henri Uimonen">
+										<img src="images/henri_small.png" class="imgDevelopers" alt="Henri Uimonen" />
+									</a>
+									<a href="info.html">
 								<figcaption>Henri Uimonen</figcaption></a></figure>
 								<figure>
-								<img src="images/iira_small.png" class="imgDevelopers" alt="Iira Salo"><a href="info.html">
+									<a href="images/iira_small.png" data-lightbox="Iira Salo" data-title="Iira Salo">
+										<img src="images/iira_small.png" class="imgDevelopers" alt="Iira Salo" />
+									</a>
+										<a href="info.html">
 								<figcaption>Iira Salo</figcaption></a></figure>
 							</section>
 						</div>
 				</footer>
+
+	<script src="js/lightbox.js"></script>
 	</body>
 </html>

@@ -5,6 +5,8 @@
 	<meta charset="utf-8" />
 	<link href="https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/lightbox.css" />
+	<script src="js/jquery.js"></script>
 </head>
 <body>
 
@@ -106,16 +108,26 @@
 		<section class="row2">
 			<h3 id="footertitle2">Tekijät</h3>
 			<figure>
-				<img src="images/gavril_small.png" class="imgDevelopers" alt="Gavril Tschokkinen"><a href="info.html">
-				<figcaption>Gavril Tschokkinen</figcaption></a></figure>
+				<a href="images/gavril_small.png" data-lightbox="Gavril Tschokkinen" data-title="Gavril Tschokkinen">
+					<img src="images/gavril_small.png" class="imgDevelopers" alt="Gavril Tschokkinen" />
+				</a>
+				<a href="info.html">
+					<figcaption>Gavril Tschokkinen</figcaption></a></figure>
 			<figure>
-				<img src="images/henri_small.png" class="imgDevelopers" alt="Henri Uimonen"><a href="info.html">
-				<figcaption>Henri Uimonen</figcaption></a></figure>
+				<a href="images/henri_small.png" data-lightbox="Henri Uimonen" data-title="Henri Uimonen">
+					<img src="images/henri_small.png" class="imgDevelopers" alt="Henri Uimonen" />
+				</a>
+				<a href="info.html">
+					<figcaption>Henri Uimonen</figcaption></a></figure>
 			<figure>
-				<img src="images/iira_small.png" class="imgDevelopers" alt="Iira Salo"><a href="info.html">
-				<figcaption>Iira Salo</figcaption></a></figure>
+				<a href="images/iira_small.png" data-lightbox="Iira Salo" data-title="Iira Salo">
+					<img src="images/iira_small.png" class="imgDevelopers" alt="Iira Salo" />
+				</a>
+				<a href="info.html">
+					<figcaption>Iira Salo</figcaption></a></figure>
 		</section>
 	</div>
 </footer>
+<script src="js/lightbox.js"></script>
 </body>
 </html>

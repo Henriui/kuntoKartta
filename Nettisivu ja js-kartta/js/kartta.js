@@ -32,22 +32,48 @@ Lisää ko. muuttuja haun eteen: `fetch(${proxy}https://open-api.myhelsinki.fi/j
  */
 
 const baseURLMyHelsinki = 'https://open-api.myhelsinki.fi/'; //MyHelsinki BaseURL
-const tagSearch = 'v2/places/?tags_search=sports'; //MyHelsinki tag_search term
+const baseURLHRI = 'https://www.hel.fi/palvelukarttaws/rest/v4/unit/?search=';
+const tagSearch = 'v2/places/?tags_search='; //MyHelsinki tag_search term
+const myHelsinkiDefaultSearch = 'sports'; //Default search term for MyHelsinki
+const hriDefaultSearch = 'liikunta+helsinki'; //Default search term for HRI
+let searchTermMyHelsinki = myHelsinkiDefaultSearch; //By default MyHelsinki search is for sports in general
+let searchTermHRI = hriDefaultSearch; //By default HRI search is for sports in general
 let userLocation = []; //User location
 
+startSearch(); //Call startSearch function on start
 
-//luodaan kartta.
+
+/*--------------------------------------------------------------------------------*/
+//Testi, jolla saadaan pelkästään uimapaikat näkyviin ja halutessa kaikki takaisin
+//Kommentoikaa, onko tämä edes tarpeellinen ominaisuus.
+/*--------------------------------------------------------------------------------*/
+//Get urheilu and uimaan buttons from sidenav
+const sports = document.querySelector('#sports').addEventListener('click', function(){
+    changeSearchTerm('sports', 'liikunta+helsinki')
+});
+
+const swim = document.querySelector('#swim').addEventListener('click', function(){
+    changeSearchTerm('Swimming', 'uima-allas+helsinki')
+});
+
+//Change search term according to a button click on a sidenav
+function changeSearchTerm(newSearchMyHelsinki, newSearchHRI){
+    searchTermMyHelsinki = newSearchMyHelsinki; //Change MyHelsinki search term
+    searchTermHRI = newSearchHRI; //Change HRI search term
+    markerGroup.clearLayers(); //Clear all markers
+    startSearch(); //Start seach
+}
+/*--------------------------------------------------------------------------------*/
+
+
+//Create map
 const map = L.map('map',{
     center: [60.22, 24], zoom:12,zoomControl:false
 });
 //navigaation siirto ala-oikealle
 L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-//Poista, kun projekti on valmis
-//const proxy = 'gobetween.oklabs.org/pipe/';
-//const proxy = 'https://api.allorigins.win/raw?url=';
-//END
-
+//Create tileLayer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
@@ -103,8 +129,11 @@ input.addEventListener('keyup', (e) => {
 });
 
 
-//Start search
-navigator.geolocation.getCurrentPosition(success, error);
+//Start search function called on start
+function startSearch(){
+    navigator.geolocation.getCurrentPosition(success, error);
+}
+
 
 //If position is found
 function success(pos){
@@ -138,10 +167,6 @@ function error(err){
 
 
 
-
-
-
-
 /*--------------------------------------------------------------------------------*/
 //Get activity locations (from myHelsinki)
 /*--------------------------------------------------------------------------------*/
@@ -149,7 +174,7 @@ function error(err){
 
 function getActivities(){
     //Concatenated MyHelsinki address
-    const myHelsinkiAddress = baseURLMyHelsinki + tagSearch;
+    const myHelsinkiAddress = baseURLMyHelsinki + tagSearch + searchTermMyHelsinki;
     //Cort proxy query address
     const query = `https://api.allorigins.win/get?url=${encodeURIComponent(myHelsinkiAddress)}`;
 
@@ -181,7 +206,7 @@ function getActivities(){
 /*--------------------------------------------------------------------------------*/
 
 function hriNouto() {
-    const helfi = "https://www.hel.fi/palvelukarttaws/rest/v4/unit/?search=liikunta+helsinki";
+    const helfi = baseURLHRI + searchTermHRI;
     const query = `https://api.allorigins.win/get?url=${encodeURIComponent(helfi)}`;
     fetch(query)
     .then(response => response.json())

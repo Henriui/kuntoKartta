@@ -10,7 +10,7 @@
 	}
 
 	a {
-		color: #37c0fb;
+		color: #000000;
 		text-decoration: none;
 		font-family: 'Rubik', sans-serif;
 	}
@@ -24,6 +24,7 @@
 		line-height: 1.5em;
 		font-family: 'Rubik', sans-serif;
 	}
+     
 
 
         ul {
@@ -34,23 +35,37 @@
 	        line-height: 2.5em;
 		font-family: 'Karla', sans-serif;
 		margin-bottom: 5px;
+               
 
         }
 
-	h1, h2, h3 {
+	h1, h2 {
 		font-weight: 700;
 		line-height: 1.9em;
 		margin-bottom: 1em;
-		margin-top: 1em;
 		font-family: 'Karla', sans-serif;
 	}
+        
 
         h3 {
 		font-size: 1.6em;
+                margin-bottom: 0.5em;
+                font-weight: 700;
+		line-height: 1.9em;
+                font-family: 'Karla', sans-serif;
 	}
-
-#subheading3 {
-                 margin-top: 2em;
+        h4 {
+		font-size: 1em;
+                font-weight: 700;
+                font-family: 'Karla', sans-serif;
+	} 
+     header h2 {
+		display: inline-block;
+		
+		}
+.subheading3 {
+                margin-top: 2em;
+                
         }
 
 #subheading4 {
@@ -77,10 +92,12 @@
 
 	.row > * {
 		box-sizing: border-box;
+
 		}
 
 	.row2  {
-		width: 33.33333%;
+		width: 33.333%;
+                padding-right: 60px;
 		}
 
 	.row3 {
@@ -97,17 +114,11 @@
 
    .row3-text {
 	        margin-left: calc(30% + 2em);
-                margin-right:20px;
+                margin-right: 20px;
 }
 
-	.row4 {
-		margin-top: -100px;
-		margin-left: -90px;
-		}
 
-    .row4 > * {
-		padding: 100px 0 0 70px;
-		}
+    
 
         .row5 {
 	        width: 66.66667%;
@@ -139,8 +150,17 @@
          .imgDevelopers {
 	        width: 80px;
 	        height: 80px;
-	        border-radius: 4px;
+	        border-radius: 7px;
                }
+
+         .imgDevelopersInfo{
+                display: block;
+                width: 40%;
+                border-radius: 7px;
+                margin-left: -32px;
+                margin-bottom: 25px;
+               }
+               
 
 /*-----------------------------------------------------------*/
 
@@ -171,6 +191,7 @@
 	        padding: 0 1.5em;
 	        line-height: 2.75em;
 	        margin-top: -1em;
+                
 	        text-align: center;
                }
 
@@ -257,10 +278,7 @@ nav > ul > li.current a {
 		padding: 0em;
 		}
 
-     header h2 {
-		display: inline-block;
-		font-size: 2em;
-		}
+
 
 header .button {
                 line-height: 3em;
@@ -271,9 +289,24 @@ header .button {
 /* Article */
 
 	article {
-		padding: 5em 0 3em 0;
+		padding: 1.7em 0 3em 0;
 		background: #fff;
 	       }
+
+/*---------------------------------------------------*/
+
+/* Video */
+
+       .responsiveIframe {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-bottom: 20px;
+  right: 0;
+  width: 100%;
+  height: 520px;
+
+}
 
 /*-------------------------------------------------*/
 
@@ -282,7 +315,7 @@ header .button {
 
 	footer {
 		padding: 1em 0 2em 0;
-                background-color: #d8e3ed;
+                background-color: #c2ddd6;
 	        }
 
 	footer a {

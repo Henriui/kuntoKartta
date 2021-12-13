@@ -30,7 +30,6 @@ Lisää ennen fetch-komentoa muuttuja const proxy
 = 'https://cors-anywhere.herokuapp.com/';
 Lisää ko. muuttuja haun eteen: `fetch(${proxy}https://open-api.myhelsinki.fi/jne......
  */
-
 const baseURLMyHelsinki = 'https://open-api.myhelsinki.fi/'; //MyHelsinki BaseURL
 const baseURLHRI = 'https://www.hel.fi/palvelukarttaws/rest/v4/unit/?search=';
 const tagSearch = 'v2/places/?tags_search='; //MyHelsinki tag_search term
@@ -86,7 +85,7 @@ let markerGroup = L.layerGroup().addTo(map); //Marker group
 let routingControl = L.Routing.control({
     waypoints: [
         L.latLng(),
-        L.latLng()
+        L.latLng(),
     ],
     lineOptions: {
         addWaypoints: false,
@@ -101,9 +100,12 @@ let updateRoute = function(toPos){
         L.latLng(toPos)
     ]);
 };
+
+
 /*--------------------------------------------------------------------------------*/
 //Change radius of searchfield
 
+//button version
 /*
 //Change search area radius according to user input
 searchButton.addEventListener('click', function(){
@@ -112,6 +114,8 @@ searchButton.addEventListener('click', function(){
     navigator.geolocation.getCurrentPosition(success, error); //Start search
 })
 */
+
+//timer version
 let timer;              // Timer identifier
 const waitTime = 600;   // Wait time in milliseconds
 const input = document.querySelector('#searchField');
@@ -182,7 +186,7 @@ function getActivities(){
     .then(response => response.json())
     .then ((locationsData)=> {
         let parsedData = JSON.parse(locationsData.contents); //Parse incoming data
-        console.log(parsedData); //Console log parsed data
+        //console.log(parsedData); //Console log parsed data
 
         for(let i = 0; i < parsedData.data.length; i++){
             //Get location
@@ -217,7 +221,7 @@ function hriNouto() {
             for (let i=0; i<hriPar.length; i++) {
                 if(hriPar[i].latitude != null || hriPar[i].longitude != null){
 
-
+                    //Make latitude & longitude
                     let latlon = [];
                     latlon.lat = hriPar[i].latitude;
                     latlon.lon = hriPar[i].longitude;
@@ -226,10 +230,11 @@ function hriNouto() {
 
 
                     const name = hriPar[i].name_fi;
-                    //console.log(hriPar[i].name_fi);
+
                     const address = hriPar[i].street_address_fi;
 
                     createMarkers(lat, lon, name, address);
+
                 }
             }
         }
@@ -261,5 +266,9 @@ function createMarkers (latitude, longitude, title, street_address){
         .on('click', function() { updateRoute(markerPos); })
         .bindPopup(`${title} ${"<br>"} ${street_address}`)
         .dragging.disable();
+
+
+
     }
+
 }

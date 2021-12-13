@@ -6,6 +6,8 @@
 		font-weight: 300;
 		line-height: 1.60em;
 		margin: 0;
+              
+
 
 	}
 
@@ -64,12 +66,12 @@
 		
 		}
 .subheading3 {
-                margin-top: 2em;
+                margin-top: 2.3em;
                 
         }
 
-#subheading4 {
-	         margin-top: 2.7em;
+.subheading4 {
+	         margin-top: 2em;
         }
 
 .footertitle {
@@ -97,14 +99,17 @@
 
 	.row2  {
 		width: 33.333%;
-        padding-right: 60px;
+                padding-right: 4.5em;
+                padding-left:2em;
+                margin-bottom:2em;
 		}
 
 	.row3 {
 		width: 50%;
 		position: relative;
-		margin: 0 0 2em 0;
+		margin: 0 0 1.7em 0;
 		display: block;
+                padding-right:3.8em;
 		}
 
 .row3-img .image {
@@ -113,15 +118,13 @@
                 }
 
    .row3-text {
-	        margin-left: calc(30% + 2em);
-                margin-right: 20px;
+	        margin-left: calc(30% + 3.8em);
+                margin-right: 3.8px;
 }
-
-
-    
 
         .row5 {
 	        width: 66.66667%;
+                margin-bottom: 4em;
        }
 
 /*--------------------------------------------------------------------------*/
@@ -230,8 +233,8 @@ nav > ul > li a {
 		color: #c0c0c0;
 		border: 0;
 		display: block;
-		padding: 1.5em 2.5em 1.35em 0;
-		font-size: 1.5em;
+		padding: 2em 1.8em 1.35em 0;
+		font-size: 1.6em;
 		}
 	
 nav > ul > li:hover a {
@@ -248,7 +251,6 @@ nav > ul > li.current:before {
 		left: 20%;
 		background-color: #37c0fb;
 		}
-
 nav > ul > li.current a {
 		color: #fff;
 		font-weight: 700;
@@ -262,11 +264,12 @@ nav > ul > li.current a {
 		background-image: url("../images/banner.jpg");
 		background-position: center;
 		background-size: cover;
-		height: 27em;
+		height: 35em;
 		text-align: center;
 		position: relative;
 		display: flex;
 		flex-wrap: wrap;
+                margin-bottom: 30px;
 	}
 
        #content {
@@ -278,8 +281,6 @@ nav > ul > li.current a {
 		padding: 0em;
 		}
 
-
-
 header .button {
                 line-height: 3em;
 		margin-left: 2em;
@@ -289,7 +290,7 @@ header .button {
 /* Article */
 
 	article {
-		padding: 1.7em 0 3em 0;
+		padding: 2em 2em 2em 0;
 		background: #fff;
 	       }
 
@@ -297,16 +298,16 @@ header .button {
 
 /* Video */
 
-       .responsiveIframe {
-  position: relative;
-  top: 0;
-  left: 0;
-  margin-bottom: 20px;
-  right: 0;
-  width: 100%;
-  height: 520px;
+ .responsiveIframe {
+                position: relative;
+                top: 1em;
+                left: 0;
+                margin-bottom: 40px;
+                right: 0;
+                width: 100%;
+                height: 430px;
 
-}
+               }
 
 /*-------------------------------------------------*/
 
@@ -315,7 +316,7 @@ header .button {
 
 	footer {
 		padding: 1em 0 2em 0;
-                background-color: #c2ddd6;
+                background-color: #bdd8e3;
 	        }
 
 	footer a {
@@ -333,10 +334,11 @@ header .button {
 .container {
 	margin: auto;
 	max-width: 100%;
-	width: 1500px;
+	width: 1450px;
 	display: flex;
 	flex-wrap: wrap;
 	align-self: auto;
+       
 }
 
 @media screen and (max-width: 1680px) {
@@ -352,18 +354,32 @@ header .button {
 		/* Basic */
 
 		body {
-			font-size: 13pt;
+			font-size: 15pt;
 			line-height: 1.5em;
 		}
 
 		/* Header */
 
-		#content {
+		content {
 			padding: 2em 0 0 0;
+
 		}
 
 		h1 {
 			padding: 0 0 1.75em 0;
+		}
+                h2 {
+			font-size: 1.5em;
+			letter-spacing: 0;
+			line-height: 1em;
+                        margin-bottom: 2em;
+                        
+		}
+
+		h3 {
+			font-size: 1.5em;
+			letter-spacing: 0;
+			line-height: 1.35em;
 		}
 
 		/* Banner */
@@ -388,12 +404,107 @@ header .button {
 	.container {
 		width: 95%;
 	}
+/* Basic */
+
+		body {
+			font-size: 14pt;
+			line-height: 1.5em;
+		}
+
+		/* Header */
+
+		#content {
+			padding: 2em 0 0 0;
+
+		}
+
+		h1 {
+			padding: 0 0 1.75em 0;
+		}
+
+                h2 {
+			font-size: 1.5em;
+			letter-spacing: 0;
+			line-height: 1em;
+                        margin-bottom: 2em;
+                        
+		}
+
+		h3 {
+			font-size: 1.5em;
+			letter-spacing: 0;
+			line-height: 1.35em;
+		}
+
+		/* Banner */
+
+		header {
+			height: 20em;
+		}
+
+
+		/* Footer */
+
+		footer {
+			padding: 3em 0 3em 0;
+		}
+
+		footer .container {
+			margin-bottom: 1em;
+		}
 }
 
 @media screen and (max-width: 840px) {
 	.container {
 		width: 95%;
 	}
+/* Basic */
+
+		body {
+			font-size: 12pt;
+			line-height: 1.5em;
+		}
+
+		/* Header */
+
+		#content {
+			padding: 1em 0 0 0;
+
+		}
+
+		h1 {
+			padding: 0 0 1em 0;
+		}
+                h2 {
+			font-size: 1.5em;
+			letter-spacing: 0;
+			line-height: 1em;
+                        margin-bottom: 2em;
+                        
+		}
+
+		h3 {
+			font-size: 1.5em;
+			letter-spacing: 0;
+			line-height: 1.35em;
+		}
+
+		/* Banner */
+
+		header {
+			height: 20em;
+		}
+
+
+		/* Footer */
+
+		footer {
+			padding: 3em 0 3em 0;
+		}
+
+		footer .container {
+			margin-bottom: 1em;
+		}
 }
 
 @media screen and (max-width: 736px) {
@@ -403,33 +514,56 @@ header .button {
 	/* Mobile */ /* Basic */
 
 		body{
-			font-size: 11pt;
+			font-size: 9pt;
 			line-height: 1.35em;
+                        min-width: 550px;
+                        }
+
+                #content {
+			padding: 1em 0 0 0;
+
+		}
+
+		h1 {
+			padding: 0 0 1em 0;
+		}
+
+		/* Banner */
+
+		header {
+			height: 15em;
 		}
 
 		h2 {
-			font-size: 1.25em;
+			font-size: 1.5em;
 			letter-spacing: 0;
-			line-height: 1.35em;
+			line-height: 1em;
+                        margin-bottom: 2em;
+                        
 		}
 
 		h3 {
-			font-size: 1em;
+			font-size: 1.5em;
 			letter-spacing: 0;
 			line-height: 1.35em;
 		}
 
-		header p {
-			margin-top: -0.5em;
-			font-size: 1em;
-		}
 
 		/* Article */
 
 		article {
 			padding: 2em 0 1px 0;
 		}
-}
+
+                 /* Links */
+
+                    a {
+			font-size: 12pt;
+			letter-spacing: 0;
+			line-height: 1em;
+
+
+----------------
 
 @media screen and (max-width: 480px) {
 	.container {
@@ -446,14 +580,31 @@ header .button {
 			box-shadow: 0 0 0 7px white, 0 0 0 8px #e0e0e0;
 		}
 
+		body{
+			font-size: 7pt;
+			line-height: 1.35em;
+		}
+
+		a {
+			font-size: 11pt;
+			letter-spacing: 0;
+			line-height: 1em;
+		}
+
+		h3 {
+			font-size: 1em;
+			letter-spacing: 0;
+			line-height: 0.75em;
+		}
+
 		/* Banner */
 
-		#header {
-			height: 20em;
+		header {
+			height: 10em;
 		}
 
 		#content {
-			padding: 15px;
+			padding: 10px;
 		}
 
 		/* article */
@@ -461,13 +612,13 @@ header .button {
 		article {
 			padding: 2em 20px 1px 20px;
 		}
-		h3{
-			line-height: 0.4em;
-		}
+		
+		
 
 		footer {
 			padding: 2em 20px;
 			text-align: left;
 		}
-	}
+	
+
 

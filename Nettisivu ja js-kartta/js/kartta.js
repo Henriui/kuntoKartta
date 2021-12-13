@@ -39,6 +39,9 @@ let searchTermMyHelsinki = myHelsinkiDefaultSearch; //By default MyHelsinki sear
 let searchTermHRI = hriDefaultSearch; //By default HRI search is for sports in general
 let userLocation = []; //User location
 
+//Create a custom marker
+//Koodi tänne
+
 startSearch(); //Call startSearch function on start
 
 

@@ -93,6 +93,29 @@ Sivupainike ja sen menu
 #search{
     display: block;
     position: absolute;
-    bottom: 10%;
-    margin: 32px;
+    bottom: 12%;
+    margin-left: 40px;
+
+}
+
+#filters{
+    display: block;
+    position: absolute;
+    bottom: 20%;
+    margin-left: 11px;
+}
+#filters button {
+    background-image: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,50,0.5));
+    background-color: #37c0f0;
+    border-radius: 7px;
+    color: #fff;
+    display: inline-block;
+    width: -webkit-fill-available;
+    line-height: 2.75em;
+    margin-top: 1em;
+    text-align: center;
+}
+#filters button:hover {
+    background-color: #50c8aa;
+    color: #fff;
 }

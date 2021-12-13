@@ -16,24 +16,30 @@
 		<span id="myOpen" class="opennav" onclick="openNav()">&#9776; Kuntokartta</span>
 
 	</div>
-	<div id="mySidenav" class="sidenav">
+	<nav>
+		<div id="mySidenav" class="sidenav">
 
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="index.html">Home</a>
-		<a href="info.html">Info</a>
-		<a href="muuta.html">Muuta projektista</a>
-		<a href="#">Ota yhteyttä</a>
-		<button id="sports">Urheilu</button>
-		<button id="swim">Uimaan</button>
-		<br>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<a href="index.html">Home</a>
+			<a href="info.html">Info</a>
+			<a href="muuta.html">Muuta projektista</a>
+			<a href="#">Ota yhteyttä</a>
+			<div id="filters">
+			<button id="sports">Urheilu</button>
+			<button id="swim">Uimaan</button>
+			<br>
+			<button id="gym">Salille</button>
+			<button id="sauna">Saunaan</button>
+			<br>
+			</div>
 
-		<div id="search">
-			<p class="sidenavtxt">Hakuetäisyys metreinä</p>
-			<input id="searchField" type="text" placeholder="2000">
+			<div id="search">
+				<p class="sidenavtxt">Hakuetäisyys metreinä</p>
+				<input id="searchField" type="text" placeholder="2000">
+			</div>
+
 		</div>
-
-	</div>
-
+	</nav>
 	<div id="map"></div>
 </main>
 <footer></footer>

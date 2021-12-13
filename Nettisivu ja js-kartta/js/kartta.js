@@ -46,13 +46,21 @@ startSearch(); //Call startSearch function on start
 //Testi, jolla saadaan pelkästään uimapaikat näkyviin ja halutessa kaikki takaisin
 //Kommentoikaa, onko tämä edes tarpeellinen ominaisuus.
 /*--------------------------------------------------------------------------------*/
-//Get urheilu and uimaan buttons from sidenav
+//Get filter buttons from sidenav
 const sports = document.querySelector('#sports').addEventListener('click', function(){
     changeSearchTerm('sports', 'liikunta+helsinki')
 });
 
 const swim = document.querySelector('#swim').addEventListener('click', function(){
     changeSearchTerm('Swimming', 'uima-allas+helsinki')
+});
+
+const gym = document.querySelector('#gym').addEventListener('click', function(){
+    changeSearchTerm('Gym', 'kuntosali+helsinki')
+});
+
+const sauna = document.querySelector('#sauna').addEventListener('click', function(){
+    changeSearchTerm('Sauna', 'sauna+helsinki')
 });
 
 //Change search term according to a button click on a sidenav

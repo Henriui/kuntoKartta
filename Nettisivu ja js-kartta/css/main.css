@@ -26,6 +26,10 @@
 		line-height: 1.5em;
 		font-family: 'Rubik', sans-serif;
 	}
+        .DevInfo {
+                padding-right: 30px;
+                margin-top:-60px;
+        }
      
 
 
@@ -81,6 +85,8 @@
 #footertitle2 {
 	margin-left: 30px;
     }
+
+
 
 /*----------------------------------------------------------------*/
 
@@ -163,6 +169,16 @@
                 margin-left: -32px;
                 margin-bottom: 25px;
                }
+         .imgEmailicon {
+                display: block;
+                margin-left: -32px;
+                margin-bottom: 25px; 
+               }
+             .Devemail {
+                margin-left: -32px;
+                margin-top: -15px;
+
+               }
                
 
 /*-----------------------------------------------------------*/
@@ -219,7 +235,7 @@
 		content: '';
 		display: block;
 		width: 100%;
-		height: 0.65em;
+		height: 0.8em;
 		background-color: #37c0fb;
 		}
 		
@@ -242,14 +258,15 @@ nav > ul > li:hover a {
                 }
 				
 nav > ul > li.current:before {
-		width: 0.75em;
+		width: 0.9em;
 		height: 0.9em;
 		content: '';
 		display: block;
 		position: absolute;
-		bottom: -0.5em;
+		bottom: -0.8em;
 		left: 20%;
 		background-color: #37c0fb;
+                transform: rotateZ(45deg);
 		}
 nav > ul > li.current a {
 		color: #fff;
@@ -355,32 +372,14 @@ header .button {
 
 		body {
 			font-size: 15pt;
-			line-height: 1.5em;
 		}
 
 		/* Header */
 
-		content {
-			padding: 2em 0 0 0;
-
+		#content {
+			padding: 0.75em 0 0 0;
 		}
 
-		h1 {
-			padding: 0 0 1.75em 0;
-		}
-                h2 {
-			font-size: 1.5em;
-			letter-spacing: 0;
-			line-height: 1em;
-                        margin-bottom: 2em;
-                        
-		}
-
-		h3 {
-			font-size: 1.5em;
-			letter-spacing: 0;
-			line-height: 1.35em;
-		}
 
 		/* Banner */
 
@@ -388,17 +387,6 @@ header .button {
 			height: 20em;
 		}
 
-
-		/* Footer */
-
-		footer {
-			padding: 3em 0 3em 0;
-		}
-
-		footer .container {
-			margin-bottom: 1em;
-		}
-}
 
 @media screen and (max-width: 980px) {
 	.container {
@@ -408,7 +396,6 @@ header .button {
 
 		body {
 			font-size: 14pt;
-			line-height: 1.5em;
 		}
 
 		/* Header */
@@ -418,41 +405,12 @@ header .button {
 
 		}
 
-		h1 {
-			padding: 0 0 1.75em 0;
-		}
-
-                h2 {
-			font-size: 1.5em;
-			letter-spacing: 0;
-			line-height: 1em;
-                        margin-bottom: 2em;
-                        
-		}
-
-		h3 {
-			font-size: 1.5em;
-			letter-spacing: 0;
-			line-height: 1.35em;
-		}
-
 		/* Banner */
 
 		header {
 			height: 20em;
 		}
 
-
-		/* Footer */
-
-		footer {
-			padding: 3em 0 3em 0;
-		}
-
-		footer .container {
-			margin-bottom: 1em;
-		}
-}
 
 @media screen and (max-width: 840px) {
 	.container {
@@ -462,7 +420,7 @@ header .button {
 
 		body {
 			font-size: 12pt;
-			line-height: 1.5em;
+			
 		}
 
 		/* Header */
@@ -470,24 +428,7 @@ header .button {
 		#content {
 			padding: 1em 0 0 0;
 
-		}
-
-		h1 {
-			padding: 0 0 1em 0;
-		}
-                h2 {
-			font-size: 1.5em;
-			letter-spacing: 0;
-			line-height: 1em;
-                        margin-bottom: 2em;
-                        
-		}
-
-		h3 {
-			font-size: 1.5em;
-			letter-spacing: 0;
-			line-height: 1.35em;
-		}
+		}		
 
 		/* Banner */
 
@@ -496,37 +437,17 @@ header .button {
 		}
 
 
-		/* Footer */
-
-		footer {
-			padding: 3em 0 3em 0;
-		}
-
-		footer .container {
-			margin-bottom: 1em;
-		}
-}
 
 @media screen and (max-width: 736px) {
 	.container {
 		width: 90%;
 	}
-	/* Mobile */ /* Basic */
+	/* Mobile */
 
 		body{
 			font-size: 9pt;
-			line-height: 1.35em;
-                        min-width: 550px;
+			min-width: 550px;
                         }
-
-                #content {
-			padding: 1em 0 0 0;
-
-		}
-
-		h1 {
-			padding: 0 0 1em 0;
-		}
 
 		/* Banner */
 
@@ -534,91 +455,5 @@ header .button {
 			height: 15em;
 		}
 
-		h2 {
-			font-size: 1.5em;
-			letter-spacing: 0;
-			line-height: 1em;
-                        margin-bottom: 2em;
-                        
-		}
-
-		h3 {
-			font-size: 1.5em;
-			letter-spacing: 0;
-			line-height: 1.35em;
-		}
-
-
-		/* Article */
-
-		article {
-			padding: 2em 0 1px 0;
-		}
-
-                 /* Links */
-
-                    a {
-			font-size: 12pt;
-			letter-spacing: 0;
-			line-height: 1em;
-
-
-----------------
-
-@media screen and (max-width: 480px) {
-	.container {
-		width: 100%;
-	}
-	/* Mobile (Portrait) */
-		.button {
-
-			display: block;
-			font-size: 24px;
-			width: 4em;
-			height: 4em;
-			line-height: 4em;
-			box-shadow: 0 0 0 7px white, 0 0 0 8px #e0e0e0;
-		}
-
-		body{
-			font-size: 7pt;
-			line-height: 1.35em;
-		}
-
-		a {
-			font-size: 11pt;
-			letter-spacing: 0;
-			line-height: 1em;
-		}
-
-		h3 {
-			font-size: 1em;
-			letter-spacing: 0;
-			line-height: 0.75em;
-		}
-
-		/* Banner */
-
-		header {
-			height: 10em;
-		}
-
-		#content {
-			padding: 10px;
-		}
-
-		/* article */
-
-		article {
-			padding: 2em 20px 1px 20px;
-		}
-		
-		
-
-		footer {
-			padding: 2em 20px;
-			text-align: left;
-		}
-	
 
 

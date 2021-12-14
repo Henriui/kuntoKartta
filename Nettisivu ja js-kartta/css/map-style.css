@@ -135,4 +135,6 @@ Sivupainike ja sen menu
     width: 0px;
     height: 450px;
     color:white;
+    white-space: break-spaces;
+    padding: 20px;
 }

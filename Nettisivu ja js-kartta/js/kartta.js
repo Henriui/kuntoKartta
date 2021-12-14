@@ -46,10 +46,8 @@ startSearch(); //Call startSearch function on start
 
 
 /*--------------------------------------------------------------------------------*/
-//Testi, jolla saadaan pelkästään uimapaikat näkyviin ja halutessa kaikki takaisin
-//Kommentoikaa, onko tämä edes tarpeellinen ominaisuus.
+//Get filter buttons from sidenav and change search term
 /*--------------------------------------------------------------------------------*/
-//Get filter buttons from sidenav
 const sports = document.querySelector('#sports').addEventListener('click', function(){
     changeSearchTerm('sports', 'liikunta+helsinki')
 });
@@ -209,8 +207,7 @@ function getActivities(){
             //Get address
             const {street_address,} = parsedData.data[i].location.address;
 
-            //Osoitetta ei kannattane syöttää lopullisessa versiossa createMarkers-funktioon.
-            //Muutetaan datavirtaa sitten sen mukaan, mihin sitä halutaan syöttää.
+            //Create marker
             createMarkers(lat, lon, fi, street_address);
         }
     });
@@ -227,7 +224,7 @@ function hriNouto() {
     .then(response => response.json())
     .then((hriraw) => {
         let hriPar = JSON.parse(hriraw.contents);
-        console.log(hriPar);
+        //console.log(hriPar);
         try{
             for (let i=0; i<hriPar.length; i++) {
                 if(hriPar[i].latitude != null || hriPar[i].longitude != null){
@@ -239,20 +236,17 @@ function hriNouto() {
 
                     let {lat, lon} = latlon;
 
-
                     const name = hriPar[i].name_fi;
 
                     const address = hriPar[i].street_address_fi;
 
                     createMarkers(lat, lon, name, address);
-
                 }
             }
         }
         catch (err){
             console.log("error with latlong");
         }
-
     });
 }
 

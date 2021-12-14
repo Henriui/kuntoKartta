@@ -39,11 +39,12 @@ let searchTermMyHelsinki = myHelsinkiDefaultSearch; //By default MyHelsinki sear
 let searchTermHRI = hriDefaultSearch; //By default HRI search is for sports in general
 let userLocation = []; //User location
 
+const description = document.querySelector('#description'); //Get description section from kartta.html
+
 //Create a custom marker
 //Koodi tänne
 
 startSearch(); //Call startSearch function on start
-
 
 /*--------------------------------------------------------------------------------*/
 //Get filter buttons from sidenav and change search term
@@ -140,6 +141,21 @@ input.addEventListener('keyup', (e) => {
         navigator.geolocation.getCurrentPosition(success, error); //Start search
     }, waitTime);
 });
+
+//Create description field in kartta.html sidenav
+function createDescription(title, address){
+    description.innerHTML = ""; //Clear all child elements of description field
+
+    let nameField = document.createElement('p');
+    let addressField = document.createElement('p');
+
+    nameField.innerHTML = title;
+    addressField.innerHTML = address;
+
+    //Add elements as child
+    description.appendChild(nameField);
+    description.appendChild(addressField);
+}
 
 
 //Start search function called on start
@@ -268,12 +284,10 @@ function createMarkers (latitude, longitude, title, street_address){
         let mark = L.marker([latitude, longitude])
         .addTo(markerGroup)
         .addTo(map)
-        .on('click', function() { updateRoute(markerPos); })
+        .on('click', function() { updateRoute(markerPos);
+            createDescription(title, street_address); })
         .bindPopup(`${title} ${"<br>"} ${street_address}`)
         .dragging.disable();
-
-
-
     }
 
 }

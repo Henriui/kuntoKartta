@@ -121,3 +121,8 @@ Sivupainike ja sen menu
     background-color: #50c8aa;
     color: #fff;
 }
+
+/*Descriptin field*/
+#description {
+    background-color: white;
+}

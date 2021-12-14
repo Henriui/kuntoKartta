@@ -146,6 +146,7 @@ Sivupainike ja sen menu
     padding: 5px 10px 5px 10px;
     text-decoration: none;
     color: white;
+    margin-top: 15px;
 }
 #description a:hover{
     background-color: #50c8aa;

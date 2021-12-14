@@ -155,12 +155,16 @@ input.addEventListener('keyup', (e) => {
 });
 
 //Create description field in kartta.html sidenav
-function createDescription(title, address, desc, web){
+function createDescription(title, address, desc, web, markerPos){
     description.innerHTML = ""; //Clear all child elements of description field
     let nameField = document.createElement('p');
     let addressField = document.createElement('p');
     let descField = document.createElement('p');
     let webField = document.createElement('a');
+    let navField = document.createElement('a');
+    let br = document.createElement('br');
+
+    //make sure that fields have something
 
     if (title != null){nameField.innerHTML = title;}
     else{nameField.innerHTML = "";}
@@ -176,6 +180,11 @@ function createDescription(title, address, desc, web){
         webField.innerText = "Nettisivuille";}
     else{webField.innerText = "Ei nettisivuja";
     webField.style = "color:black";}
+    navField.innerText ="Navigoi kohteeseen";
+    navField.href = "javascript:null";
+    navField.addEventListener("click", (e) =>{
+        updateRoute(markerPos);
+    });
 
     //Add elements as child
 
@@ -183,6 +192,8 @@ function createDescription(title, address, desc, web){
     description.appendChild(addressField);
     description.appendChild(descField);
     description.appendChild(webField);
+    description.appendChild(br);
+    description.appendChild(navField);
 }
 
 
@@ -317,8 +328,8 @@ function createMarkers (latitude, longitude, title, street_address, desc, web){
         let mark = L.marker([latitude, longitude])
         .addTo(markerGroup)
         .addTo(map)
-        .on('click', function() { updateRoute(markerPos);
-            createDescription(title, street_address, desc, web);
+        .on('click', function() { //updateRoute(markerPos);
+            createDescription(title, street_address, desc, web, markerPos);
             openSide();})
         .bindPopup(`${title} ${"<br>"} ${street_address}`)
         .dragging.disable();

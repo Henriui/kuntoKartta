@@ -6,9 +6,6 @@
 		font-weight: 300;
 		line-height: 1.60em;
 		margin: 0;
-              
-
-
 	}
 
 	a {
@@ -16,7 +13,7 @@
 		text-decoration: none;
 		font-family: 'Rubik', sans-serif;
 	}
-    a:hover {
+  a:hover {
 		color: #876abc;
 		font-family: 'Rubik', sans-serif;
 	}
@@ -26,7 +23,8 @@
 		line-height: 1.5em;
 		font-family: 'Rubik', sans-serif;
 	}
-        .DevInfo {
+
+ .DevInfo {
                 padding-right: 30px;
                 margin-top:-60px;
         }
@@ -41,18 +39,16 @@
 	        line-height: 2.5em;
 		font-family: 'Karla', sans-serif;
 		margin-bottom: 5px;
-               
 
         }
 
-	h1, h2 {
+    h1, h2 {
 		font-weight: 700;
 		line-height: 1.9em;
 		margin-bottom: 1em;
 		font-family: 'Karla', sans-serif;
 	}
         
-
         h3 {
 		font-size: 1.6em;
                 margin-bottom: 0.5em;
@@ -60,15 +56,18 @@
 		line-height: 1.9em;
                 font-family: 'Karla', sans-serif;
 	}
+
         h4 {
 		font-size: 1em;
                 font-weight: 700;
                 font-family: 'Karla', sans-serif;
 	} 
-     header h2 {
+
+ header h2 {
 		display: inline-block;
 		
-		}
+        }
+
 .subheading3 {
                 margin-top: 2.3em;
                 
@@ -83,16 +82,27 @@
 	}
 
 #footertitle2 {
-	margin-left: 30px;
-    }
+	         margin-left: 30px;
+        }
 
+    .Devemail {
+                margin-left: -32px;
+                margin-top: -15px;
+        }
 
+.scrollabletextbox {
+                 height:400px;
+                 width:800px;
+                 font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+                 font-size: 82%;
+                 overflow:scroll;
+        }
 
 /*----------------------------------------------------------------*/
 
 /* Row styles */
 
-	.row {
+	  .row {
 		display: flex;
 		flex-wrap: wrap;
 		box-sizing: border-box;
@@ -126,12 +136,19 @@
    .row3-text {
 	        margin-left: calc(30% + 3.8em);
                 margin-right: 3.8px;
-}
+              }
 
         .row5 {
 	        width: 66.66667%;
                 margin-bottom: 4em;
-       }
+              }
+
+        .row6 {
+               padding: 2em 2em 2em 0;
+	       background: #fff;
+               width: 62%;
+               margin-bottom: 4em;
+               }
 
 /*--------------------------------------------------------------------------*/
 
@@ -147,7 +164,7 @@
 		margin-top: -20px;
 	       }
 
-	.image.left {
+   .image.left {
 		display: flex;
 		float: left;
 		flex-wrap: wrap;
@@ -156,28 +173,24 @@
 		top: 0.25em;
 		}
 
-         .imgDevelopers {
+ .imgDevelopers {
 	        width: 80px;
 	        height: 80px;
 	        border-radius: 7px;
-               }
+                }
 
-         .imgDevelopersInfo{
+.imgDevelopersInfo{
                 display: block;
                 width: 40%;
                 border-radius: 7px;
                 margin-left: -32px;
                 margin-bottom: 25px;
-               }
-         .imgEmailicon {
+                }
+
+ .imgEmailicon {
                 display: block;
                 margin-left: -32px;
                 margin-bottom: 25px; 
-               }
-             .Devemail {
-                margin-left: -32px;
-                margin-top: -15px;
-
                }
                
 
@@ -196,9 +209,10 @@
 		margin-top: 1em;
 		text-align: center;
 	        }
-		.button:hover {
-			background-color: #50c8aa;
-			color: #fff;
+		
+  .button:hover {
+		background-color: #50c8aa;
+		color: #fff;
 		}
 
        .button2 {
@@ -210,8 +224,7 @@
 	        padding: 0 1.5em;
 	        line-height: 2.75em;
 	        margin-top: -1em;
-                
-	        text-align: center;
+                text-align: center;
                }
 
 .button2:hover {
@@ -223,15 +236,15 @@
 
 /* NAV */
 
-	nav {
+	  nav {
 		background-color: #333;
 		padding: 0;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-evenly;
-	    }
+	       }
 
-  nav:after {
+    nav:after {
 		content: '';
 		display: block;
 		width: 100%;
@@ -268,6 +281,7 @@ nav > ul > li.current:before {
 		background-color: #37c0fb;
                 transform: rotateZ(45deg);
 		}
+
 nav > ul > li.current a {
 		color: #fff;
 		font-weight: 700;
@@ -287,7 +301,7 @@ nav > ul > li.current a {
 		display: flex;
 		flex-wrap: wrap;
                 margin-bottom: 30px;
-	}
+	       }
 
        #content {
 		position: absolute;
@@ -302,6 +316,8 @@ header .button {
                 line-height: 3em;
 		margin-left: 2em;
 		}
+
+
 /*---------------------------------------------------*/
 
 /* Article */
@@ -309,7 +325,7 @@ header .button {
 	article {
 		padding: 2em 2em 2em 0;
 		background: #fff;
-	       }
+	        }
 
 /*---------------------------------------------------*/
 
@@ -323,7 +339,16 @@ header .button {
                 right: 0;
                 width: 100%;
                 height: 430px;
+               }
 
+ .responsiveIframe2 {
+                position: relative;
+                top: 1em;
+                left: 0;
+                margin-bottom: 10px;
+                right: 0;
+                width: 100%;
+                height: 205px;
                }
 
 /*-------------------------------------------------*/
@@ -336,11 +361,11 @@ header .button {
                 background-color: #bdd8e3;
 	        }
 
-	footer a {
+      footer a {
 		color: #1f1f1f;
 		}
 
-	footer a:hover {
+footer a:hover {
 		color: #37c0fb;
 		}
 
@@ -354,15 +379,13 @@ header .button {
 	width: 1450px;
 	display: flex;
 	flex-wrap: wrap;
-	align-self: auto;
-       
-}
+	align-self: auto;  
+        }
 
 @media screen and (max-width: 1680px) {
 	.container {
 		width: 1200px;
 	}
-}
 
 @media screen and (max-width: 1280px) {
 	.container {
@@ -391,8 +414,9 @@ header .button {
 @media screen and (max-width: 980px) {
 	.container {
 		width: 95%;
-	}
-/* Basic */
+	        }
+  
+               /* Basic */
 
 		body {
 			font-size: 14pt;
@@ -416,18 +440,16 @@ header .button {
 	.container {
 		width: 95%;
 	}
-/* Basic */
+              /* Basic */
 
 		body {
-			font-size: 12pt;
-			
+			font-size: 12pt;		
 		}
 
 		/* Header */
 
 		#content {
 			padding: 1em 0 0 0;
-
 		}		
 
 		/* Banner */
@@ -442,14 +464,15 @@ header .button {
 	.container {
 		width: 90%;
 	}
-	/* Mobile */
+	      /* Mobile */
 
 		body{
 			font-size: 9pt;
 			min-width: 550px;
                         }
 
-		/* Banner */
+		
+               /* Banner */
 
 		header {
 			height: 15em;

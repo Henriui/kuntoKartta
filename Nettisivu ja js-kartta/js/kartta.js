@@ -88,7 +88,7 @@ map.on('popupclose', function(){
     description.style.width = null; //Clear style on description element
     description.style.padding = null; //Clear style on description element
     description.innerHTML = ""; //Clear all child elements of description field
-    closeSide();
+    closeSide(); //Close description panel
     updateRoute(null); //Update route with a null value
 });
 

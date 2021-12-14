@@ -124,17 +124,17 @@ Sivupainike ja sen menu
 
 /*Descriptin field*/
 #description {
-    border-bottom-left-radius: 35px ;
-    border-top-left-radius: 35px;
+    border-bottom-right-radius: 35px ;
+    border-top-right-radius: 35px;
     transition: 0.5s;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 500;
-    bottom: 2%;
-    right: 0%;
+    bottom: 25%;
+    left: 0%;
     width: 0px;
     height: 450px;
     color:white;
-    white-space: break-spaces;
-    padding: 20px;
+    white-space: pre-wrap;
+    padding: 0px;
 }

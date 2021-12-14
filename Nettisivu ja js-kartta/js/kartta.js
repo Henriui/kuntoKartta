@@ -80,7 +80,7 @@ const map = L.map('map',{
     center: [60.22, 24], zoom:12,zoomControl:false
 });
 //navigaation siirto ala-oikealle
-L.control.zoom({ position: 'bottomleft' }).addTo(map);
+L.control.zoom({ position: 'bottomright' }).addTo(map);
 
 //Create tileLayer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -302,7 +302,49 @@ function createMarkers (latitude, longitude, title, street_address, desc, web){
         .dragging.disable();
     }
 
+
+
 }
+
+//-----------sivupalkkien funktiot-----------------
+let sideopen = false;
+let wasopen = false;
+
+let navopen = false;
+
+// Description palkki
 function openSide(){
-    document.getElementById("description").style.width = "275px";
+    document.getElementById("description").style.width = "255px";
+    document.getElementById("description").style.padding = "20px";
+    if (navopen === true){
+        closeNav();
+    }
+    if (sideopen === false){
+        sideopen = true;
+    }
+}
+function closeSide(){
+    sideopen = false;
+    wasopen = true;
+    document.getElementById("description").style.width = "0px";
+    document.getElementById("description").style.padding = "0px";
+}
+
+//Päämenu avaus ja sulku
+function openNav() {
+    navopen = true;
+    document.getElementById("mySidenav").style.width = "275px";
+    document.getElementById("myOpen").style.visibility="hidden";
+    if (sideopen === true){
+        closeSide();
+    }
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("myOpen").style.visibility="visible";
+    if (wasopen === true){
+        navopen = false;
+        openSide();
+    }
 }

@@ -126,16 +126,16 @@ Sivupainike ja sen menu
 #description {
     border-bottom-right-radius: 35px ;
     border-top-right-radius: 35px;
-    transition: 0.5s;
+    transition: 0.3s;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 500;
     bottom: 25%;
     left: 0%;
     width: 0px;
     height: 450px;
     color:white;
-    white-space: pre-wrap;
+    white-space: break-spaces;
     padding: 0px;
 }
 #description a{

@@ -326,6 +326,7 @@ let navopen = false;
 function openSide(){
     document.getElementById("description").style.width = "255px";
     document.getElementById("description").style.padding = "20px";
+    document.getElementById("description").style.visibility = "visible";
     if (navopen === true){
         closeNav();
     }
@@ -338,6 +339,7 @@ function closeSide(){
     wasopen = true;
     document.getElementById("description").style.width = "0px";
     document.getElementById("description").style.padding = "0px";
+    document.getElementById("description").style.visibility = "hidden";
 }
 
 //Päämenu avaus ja sulku

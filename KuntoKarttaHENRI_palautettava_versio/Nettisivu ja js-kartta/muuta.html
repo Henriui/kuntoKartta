@@ -1,0 +1,464 @@
+<!DOCTYPE HTML>
+<html lang="fi">
+<head>
+	<title>Muuta projektista</title>
+	<meta charset="utf-8" />
+	<link href="https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/lightbox.css" />
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+	<ul>
+		<li><a href="index.html">Home</a></li>
+		<li><a href="kartta.html">Kartta</a></li>
+		<li><a href="info.html">Info</a></li>
+		<li class="current"><a href="muuta.html">Muuta projektista</a></li>
+	</ul>
+</nav>
+<!-- Main -->
+
+<main class="container">
+
+	<aside class="row row4">
+		<section class="row2">
+			<!-- Sidebar -->
+			<section>
+				<br><h3>Tietoa videosta</h3>
+				<iframe class="responsiveIframe2" src="https://www.youtube.com/embed/5KW_yAV_pu4" title="YouTube video player"
+						 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<h4>Synopsis</h4>
+				<p> KuntokarttaHENRI -mainosvideo esittelee liikuntapaikkoja Helsingissä (esimerkkinä ulkokuntosali). Ohjaa katsojan nettisivuille käyttämään
+					projektin karttaa suullisesti ja kuvan keinoin.</p>
+
+				<h4>Tavoite</h4>
+				<p> Tunnelmallinen, mutta katsojan näkökulmasta riittävän informatiivinen liikuntakartalle ohjaava mainosvideo.</p>
+
+				<h4>Kohderyhmä</h4>
+				<p>Helsinkiläiset aikuiset ja nuoret liikunnan harrastajat.</p>
+
+				<h4>Mihin kohderyhmän ongelmaan tai tarpeeseen video vastaa?</h4>
+				<p>Video ohjaa katsojan liikuntakartan nettisivulle. Helpottaa liikuntapaikkojen löytämistä, kannustaa.</p>
+
+				<div>
+					<a href="images/kuvakasikirjoitus.jpg" class="button2">Kuvakäsikirjoitus</a>
+				</div>
+			</section>
+
+			<section>
+				<h3 class="subheading4">Videon ääniraita</h3>
+
+				<audio class="audio1" controls="">
+					<source src="video_sound/Kuntokarttahenri.mp3" type="audio/mp3">
+				</audio>
+				<h4 class="subheading3">Puhuttu teksti</h4>
+				<p>"Helsingissä liikutaan - usein vieläpä aivan ilmaiseksi. Löydä liikuntapaikkasi kätevästi
+					Kuntokartta Henrillä osoitteessa www.kuntokarttahenri.fi!"</p>
+			</section>
+		</section>
+
+			<!-- Content -->
+			<article class="row6">
+				<br><br><img src="images/banner.jpg" alt="" class="image"/>
+
+				<h3>MIKÄ ON KUNTOKARTTA HENRI? </h3>
+					<p>Kuntokartta HENRI on sivusto liikunnan harrastajille Helsingissä. Sivustolla on interaktiivinen kartta, jolla
+					käyttäjä voi etsiä haluamiaan liikuntapaikkoja (uimapaikkoja, kuntosaleja, saunoja ja urheilupaikkoja) GPS-lokaatiostaan haluamallaan etäisyydellä. Markkeria klikattaessa
+						kuntokartan sivupalkkiin ilmestyy lisätietoja kohteesta ja napit kohteen nettisivulle sekä reititykseen. Kartta reitittää matkan kohteeseen tämänhetkisestä lokaatiosta.</p>
+				   <h4> Käytetyt API:t</h4>
+				    <ul>
+						<li><a href="https://hri.fi/fi/">HRI</a></li>
+						<li><a href="http://open-api.myhelsinki.fi/">MyHelsinki openapi</a></li>
+						<li><a href="https://www.liedman.net/leaflet-routing-machine/">Leaflet Routing Machine</a></li>
+					</ul>
+
+					<h4>Käytetyt kirjastot</h4>
+					<ul>
+						<li><a href="https://leafletjs.com/">Leaflet</a></li>
+					</ul>
+
+				    <br><p>Lisäksi sivustolla on mainosvideo, tekijöiden yhteystiedot ja muuta infromaatiota liikunnan harrastajille. Sivuston sisältö mukautuu
+					useimpiin eri näyttökokoihin.</p>
+
+				<h4>Tekijät (Metropolia AMK, Tieto- ja viestintätekniikka)</h4>
+				<ul>
+					<li>Gavril Tschokkinen</li>
+					<li>Henri Uimonen</li>
+					<li>Iira Salo</li>
+					</ul>
+
+				<h3>Kartta & koodiesimerkit</h3>
+
+				<h2> JavaScript (kartta)</h2>
+
+				<h4><u>HRI</u></h4>
+					<textarea class="scrollabletextbox" name="note">/*--------------------------------------------------------------------------------*/
+//Get activity locations from HRI
+/*--------------------------------------------------------------------------------*/
+
+function hriNouto() {
+    const helfi = baseURLHRI + searchTermHRI;
+    const query = `https://api.allorigins.win/get?url=${encodeURIComponent(helfi)}`;
+    fetch(query)
+    .then(response => response.json())
+    .then((hriraw) => {
+        let hriPar = JSON.parse(hriraw.contents);
+        //console.log(hriPar);
+        try{
+            for (let i=0; i<hriPar.length; i++) {
+                if(hriPar[i].latitude != null || hriPar[i].longitude != null){
+
+                    //Make latitude & longitude
+                    let latlon = [];
+                    latlon.lat = hriPar[i].latitude;
+                    latlon.lon = hriPar[i].longitude;
+                    let {lat, lon} = latlon;
+                    //Get name and address
+                    const name = hriPar[i].name_fi;
+                    const address = hriPar[i].street_address_fi;
+
+                    //Web address and description to marker.
+                    const desc = hriPar[i].desc_fi;
+                    const web = hriPar[i].www_fi;
+                    createMarkers(lat, lon, name, address, desc, web);
+
+                }
+            }
+        }
+        catch (err){
+            console.log("error with latlong");
+        }
+    });
+}</textarea><br><br><br>
+
+				<h4><u>MyHelsinki openapi</u></h4>
+					<textarea class="scrollabletextbox" name="note">/*--------------------------------------------------------------------------------*/
+//Get activity locations (from myHelsinki)
+/*--------------------------------------------------------------------------------*/
+
+
+function getActivities(){
+    //Concatenated MyHelsinki address
+    const myHelsinkiAddress = baseURLMyHelsinki + tagSearch + searchTermMyHelsinki;
+    //Cort proxy query address
+    const query = `https://api.allorigins.win/get?url=${encodeURIComponent(myHelsinkiAddress)}`;
+
+    fetch(query)
+    .then(response => response.json())
+    .then ((locationsData)=> {
+        let parsedData = JSON.parse(locationsData.contents); //Parse incoming data
+        console.log(parsedData); //Console log parsed data
+
+        for(let i = 0; i < parsedData.data.length; i++){
+            //Get location
+            const {lat, lon,} = parsedData.data[i].location;
+
+            //Get name
+            const {name,} = parsedData.data[i].name;
+
+            //Get address
+            const {street_address,} = parsedData.data[i].location.address;
+
+            //Web address and description to marker.
+            const desc =  parsedData.data[i].description.body;
+            const web =  parsedData.data[i].info_url;
+
+            createMarkers(lat, lon, name, street_address, desc, web);
+        }
+    });
+}</textarea><br><br><br>
+
+				<h4><u>Leaflet</u></h4>
+				<textarea class="scrollabletextbox" name="note">//Create map
+const map = L.map('map',{
+    center: [60.22, 24], zoom:12,zoomControl:false, closePopupOnClick:true
+});
+//navigaation siirto ala-oikealle
+L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+//Close navigation and description bars on null click
+map.on('popupclose', function(){
+    //console.log('Null click on map')
+    description.style.width = null; //Clear style on description element
+    description.style.padding = null; //Clear style on description element
+    description.innerHTML = ""; //Clear all child elements of description field
+	closeSide(); //Close description panel
+    updateRoute(null); //Update route with a null value
+});
+
+//Create tileLayer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);</textarea><br><br><br>
+
+				<h2>HTML ja CSS</h2>
+
+				<textarea class="scrollabletextbox" name="note">HTML -webpage footer: section "Tekijät", lightbox & custom @-sign for e-mail.
+
+<!-- Tekijät -->
+
+		<section class="row2">
+			<h3 id="footertitle2">Tekijät</h3>
+
+			<figure>
+				<a href="images/gavril_small.jpg" data-lightbox="Gavril Tschokkinen" data-
+                                  title="Gavril Tschokkinen">
+					<img src="images/gavril_thumbnail.jpg" class="imgDevelopers"
+                                         alt="Gavril Tschokkinen" /></a>
+
+				  <img src="images/at_sign.png" alt="Ota yhteyttä." />
+                                  s.posti(a)metropolia.fi<br>
+				<a href="info.html">Gavril Tschokkinen</a>
+			</figure>
+
+
+                        <figure>
+				<a href="images/henri_small.jpg" data-lightbox="Henri Uimonen" data-
+                                  title="Henri Uimonen">
+					<img src="images/henri_thumbnail.jpg" class="imgDevelopers"
+                                          alt="Henri Uimonen" /></a>
+
+				<img src="images/at_sign.png" alt="Ota yhteyttä."/>s.posti(a)metropolia.fi
+                                 <br>
+				<a href="info.html">Henri Uimonen</a>
+			</figure>
+
+
+			<figure>
+				<a href="images/iira_small.jpg" data-lightbox="Iira Salo" data-title="Iira
+                                  Salo">
+					<img src="images/iira_thumbnail.jpg" class="imgDevelopers" alt="Iira
+                                          Salo" /></a>
+
+                                 <img src="images/at_sign.png" alt="Ota yhteyttä."
+                                   />s.posti(a)metropolia.fi<br>
+				<a href="info.html">Iira Salo</a>
+			</figure>
+
+		</section></textarea><br><br><br>
+
+				<textarea class="scrollabletextbox" name="note">/* NAV */ Website navigation CSS.
+
+	  nav {
+		background-color: #333;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+	       }
+
+    nav:after {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 0.8em;
+		background-color: #37c0fb;
+		}
+
+nav > ul > li {
+		position: relative;
+		display: inline-block;
+		margin-left: 1em;
+		}
+
+nav > ul > li a {
+		color: #c0c0c0;
+		border: 0;
+		display: block;
+		padding: 2em 1.8em 1.35em 0;
+		font-size: 1.6em;
+		}
+
+nav > ul > li:hover a {
+		color: #fff;
+                }
+
+nav > ul > li.current:before {
+		width: 0.9em;
+		height: 0.9em;
+		content: '';
+		display: block;
+		position: absolute;
+		bottom: -0.8em;
+		left: 20%;
+		background-color: #37c0fb;
+                transform: rotateZ(45deg);
+		}
+
+nav > ul > li.current a {
+		color: #fff;
+		font-weight: 700;
+		}
+				</textarea><br><br><br>
+
+				<textarea class="scrollabletextbox" name="note">CSS - website
+
+<!-- Responsitivity -->
+
+		/* Container & Mediaquery */
+
+.container {
+	margin: auto;
+	max-width: 100%;
+	width: 1450px;
+	display: flex;
+	flex-wrap: wrap;
+	align-self: auto;
+        }
+
+@media screen and (max-width: 1680px) {
+	.container {
+		width: 1200px;
+	}
+
+@media screen and (max-width: 1280px) {
+	.container {
+		width: 960px;
+	}
+		/* Basic */
+
+		body {
+			font-size: 15pt;
+		}
+
+		/* Header */
+
+		#content {
+			padding: 0.75em 0 0 0;
+		}
+
+
+		/* Banner */
+
+		header {
+			height: 20em;
+		}
+
+@media screen and (max-width: 980px) {
+	.container {
+		width: 95%;
+	        }
+
+               /* Basic */
+
+		body {
+			font-size: 14pt;
+		}
+
+		/* Header */
+
+		#content {
+			padding: 2em 0 0 0;
+
+		}
+
+		/* Banner */
+
+		header {
+			height: 20em;
+		}
+
+
+
+@media screen and (max-width: 840px) {
+	.container {
+		width: 95%;
+	}
+              /* Basic */
+
+		body {
+			font-size: 12pt;
+		}
+
+		/* Header */
+
+		#content {
+			padding: 1em 0 0 0;
+		}
+
+		/* Banner */
+
+		header {
+			height: 20em;
+		}
+
+
+
+@media screen and (max-width: 736px) {
+	.container {
+		width: 90%;
+	}
+	      /* Mobile */
+
+		body{
+			font-size: 9pt;
+			min-width: 550px;
+                        }
+
+
+               /* Banner */
+
+		header {
+			height: 15em;
+		}
+
+</textarea><br><br><br>
+
+			</article>
+	</aside>
+
+</main>
+<!-- Footer -->
+<footer>
+	<div class="container row">
+		<section class="row2">
+			<h3 class="footertitle">Navigoi sivustolla</h3>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="info.html">Info</a></li>
+				<li><a href="kartta.html">Liikuntapaikat kartalla</a></li>
+				<li><a href="muuta.html">Muuta projektista</a></li>
+			</ul>
+		</section>
+		<section class="row2">
+			<h3 class="footertitle">Muita linkkejä</h3>
+			<ul>
+				<li><a href="https://www.hel.fi/kulttuurin-ja-vapaa-ajan-toimiala/fi/palvelut/liikunta-ja-ulkoilu/">Helsingin kaupunki</a></li>
+				<li><a href="https://helsinkiliikkuu.fi/">Helsinki liikkuu</a></li>
+				<li><a href="#">Liikuntasivusto2</a></li>
+			</ul>
+		</section>
+
+		<!-- Tekijät -->
+		<section class="row2">
+			<h3 id="footertitle2">Tekijät</h3>
+			<figure>
+				<a href="images/gavril_small.jpg" data-lightbox="Gavril Tschokkinen" data-title="Gavril Tschokkinen">
+					<img src="images/gavril_thumbnail.jpg" class="imgDevelopers" alt="Gavril Tschokkinen" />
+				</a>
+				<img src="images/at_sign.png" alt="Ota yhteyttä." /> s.posti(a)metropolia.fi<br>
+				<a href="info.html">Gavril Tschokkinen</a>
+			</figure>
+			<figure>
+				<a href="images/henri_small.jpg" data-lightbox="Henri Uimonen" data-title="Henri Uimonen">
+					<img src="images/henri_thumbnail.jpg" class="imgDevelopers" alt="Henri Uimonen" />
+				</a>
+				<img src="images/at_sign.png" alt="Ota yhteyttä." />s.posti(a)metropolia.fi<br>
+				<a href="info.html">Henri Uimonen</a>
+			</figure>
+			<figure>
+				<a href="images/iira_small.jpg" data-lightbox="Iira Salo" data-title="Iira Salo">
+					<img src="images/iira_thumbnail.jpg" class="imgDevelopers" alt="Iira Salo" />
+				</a> <img src="images/at_sign.png" alt="Ota yhteyttä." />s.posti(a)metropolia.fi<br>
+				<a href="info.html">Iira Salo</a>
+			</figure>
+		</section>
+	</div>
+</footer>
+
+<script src="js/lightbox.js"></script>
+<script src="js/jquery.js"></script>
+</body>
+</html>

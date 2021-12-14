@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Kuntokartta</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/leaflet-routing-machine.css" />
+	<link rel="stylesheet" href="css/map-style.css">
+
+</head>
+
+<body>
+<main>
+
+	<div class="navdiv">
+		<span id="myOpen" class="opennav" onclick="openNav()">&#9776; Kuntokartta</span>
+
+	</div>
+	<nav>
+		<div id="mySidenav" class="sidenav">
+
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<a href="index.html">Home</a>
+			<a href="info.html">Info</a>
+			<a href="muuta.html">Muuta projektista</a>
+			<a href="#">Ota yhteyttä</a>
+
+
+
+			<div id="filters">
+				<button id="sports">Urheilu</button>
+				<button id="swim">Uimaan</button>
+				<br>
+				<button id="gym">Salille</button>
+				<button id="sauna">Saunaan</button>
+				<br>
+			</div>
+
+			<div id="search">
+				<p class="sidenavtxt">Hakuetäisyys metreinä</p>
+				<input id="searchField" type="text" placeholder="2000">
+			</div>
+
+		</div>
+	</nav>
+	<section id="description">
+	</section>
+
+	<div id="map"></div>
+</main>
+<footer></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+<script src="js/leaflet-routing-machine.js"></script>
+<script src="js/kartta.js"></script>
+
+</body>
+</html>

@@ -88,7 +88,9 @@ map.on('popupclose', function(){
     description.style.width = null; //Clear style on description element
     description.style.padding = null; //Clear style on description element
     description.innerHTML = ""; //Clear all child elements of description field
+    wasopen = false;
     closeSide(); //Close description panel
+    closeNav();
     updateRoute(null); //Update route with a null value
 });
 
@@ -349,7 +351,6 @@ function openSide(){
 }
 function closeSide(){
     sideopen = false;
-    wasopen = true;
     document.getElementById("description").style.width = "0px";
     document.getElementById("description").style.padding = "0px";
     document.getElementById("description").style.visibility = "hidden";
@@ -362,6 +363,7 @@ function openNav() {
     document.getElementById("myOpen").style.visibility="hidden";
     if (sideopen === true){
         closeSide();
+        wasopen = true;
     }
 }
 

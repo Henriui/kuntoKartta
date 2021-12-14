@@ -328,7 +328,7 @@ function createMarkers (latitude, longitude, title, street_address, desc, web){
         let mark = L.marker([latitude, longitude])
         .addTo(markerGroup)
         .addTo(map)
-        .on('click', function() { //updateRoute(markerPos);
+        .on('click', function() {
             createDescription(title, street_address, desc, web, markerPos);
             openSide();})
         .bindPopup(`${title} ${"<br>"} ${street_address}`)

@@ -159,11 +159,21 @@ function createDescription(title, address, desc, web){
     let descField = document.createElement('p');
     let webField = document.createElement('a');
 
-    nameField.innerHTML = title;
-    addressField.innerHTML = address;
-    descField.innerHTML = desc;
-    webField.href = web;
-    webField.innerText = "Nettisivuille";
+    if (title != null){nameField.innerHTML = title;}
+    else{nameField.innerHTML = "";}
+
+    if (address != null){addressField.innerHTML = address;}
+    else{addressField.innerHTML = "";}
+
+    if (desc != null){addressField.innerHTML = desc;}
+    else{descField.innerHTML = "";}
+
+    if (web != null){
+        webField.href = web;
+        webField.innerText = "Nettisivuille";}
+    else{webField.innerText = "Ei nettisivuja";
+    webField.style = "color:black";}
+
     //Add elements as child
 
     description.appendChild(nameField);
@@ -328,6 +338,7 @@ let navopen = false;
 function openSide(){
     document.getElementById("description").style.width = "255px";
     document.getElementById("description").style.padding = "20px";
+    document.getElementById("description").style.visibility = "visible";
     if (navopen === true){
         closeNav();
     }
@@ -340,6 +351,7 @@ function closeSide(){
     wasopen = true;
     document.getElementById("description").style.width = "0px";
     document.getElementById("description").style.padding = "0px";
+    document.getElementById("description").style.visibility = "hidden";
 }
 
 //Päämenu avaus ja sulku

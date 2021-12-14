@@ -126,15 +126,28 @@ Sivupainike ja sen menu
 #description {
     border-bottom-right-radius: 35px ;
     border-top-right-radius: 35px;
-    transition: 0.5s;
+    transition: 0.3s;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 500;
     bottom: 25%;
     left: 0%;
     width: 0px;
     height: 450px;
     color:white;
-    white-space: pre-wrap;
+    white-space: break-spaces;
     padding: 0px;
+}
+#description a{
+    background-image: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,50,0.5));
+    background:  #37c0f0;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    color: white;
+}
+#description a:hover{
+    background-color: #50c8aa;
+    color: #fff;
 }

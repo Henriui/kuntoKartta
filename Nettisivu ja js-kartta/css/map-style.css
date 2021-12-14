@@ -124,5 +124,15 @@ Sivupainike ja sen menu
 
 /*Descriptin field*/
 #description {
-    background-color: white;
+    border-bottom-left-radius: 35px ;
+    border-top-left-radius: 35px;
+    transition: 0.5s;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 500;
+    bottom: 2%;
+    right: 0%;
+    width: 0px;
+    height: 450px;
+    color:white;
 }

@@ -80,7 +80,7 @@ const map = L.map('map',{
     center: [60.22, 24], zoom:12,zoomControl:false
 });
 //navigaation siirto ala-oikealle
-L.control.zoom({ position: 'bottomright' }).addTo(map);
+L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
 //Create tileLayer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -143,18 +143,24 @@ input.addEventListener('keyup', (e) => {
 });
 
 //Create description field in kartta.html sidenav
-function createDescription(title, address){
+function createDescription(title, address, desc, web){
     description.innerHTML = ""; //Clear all child elements of description field
-
     let nameField = document.createElement('p');
     let addressField = document.createElement('p');
+    let descField = document.createElement('p');
+    let webField = document.createElement('a');
 
     nameField.innerHTML = title;
     addressField.innerHTML = address;
-
+    descField.innerHTML = desc;
+    webField.href = web;
+    webField.innerText = "Nettisivuille";
     //Add elements as child
+
     description.appendChild(nameField);
     description.appendChild(addressField);
+    description.appendChild(descField);
+    description.appendChild(webField);
 }
 
 
@@ -211,20 +217,23 @@ function getActivities(){
     .then(response => response.json())
     .then ((locationsData)=> {
         let parsedData = JSON.parse(locationsData.contents); //Parse incoming data
-        //console.log(parsedData); //Console log parsed data
+        console.log(parsedData); //Console log parsed data
 
         for(let i = 0; i < parsedData.data.length; i++){
             //Get location
             const {lat, lon,} = parsedData.data[i].location;
 
             //Get name
-            const {fi,} = parsedData.data[i].name;
+            const {name,} = parsedData.data[i].name;
 
             //Get address
             const {street_address,} = parsedData.data[i].location.address;
 
-            //Create marker
-            createMarkers(lat, lon, fi, street_address);
+            //Web address and description to marker.
+            const desc =  parsedData.data[i].description.body;
+            const web =  parsedData.data[i].info_url;
+
+            createMarkers(lat, lon, name, street_address, desc, web);
         }
     });
 }
@@ -249,14 +258,16 @@ function hriNouto() {
                     let latlon = [];
                     latlon.lat = hriPar[i].latitude;
                     latlon.lon = hriPar[i].longitude;
-
                     let {lat, lon} = latlon;
-
+                    //Get name and address
                     const name = hriPar[i].name_fi;
-
                     const address = hriPar[i].street_address_fi;
 
-                    createMarkers(lat, lon, name, address);
+                    //Web address and description to marker.
+                    const desc = hriPar[i].desc_fi;
+                    const web = hriPar[i].www_fi;
+                    createMarkers(lat, lon, name, address, desc, web);
+
                 }
             }
         }
@@ -269,7 +280,7 @@ function hriNouto() {
 
 
 //Generate markers and current position
-function createMarkers (latitude, longitude, title, street_address){
+function createMarkers (latitude, longitude, title, street_address, desc, web){
     //Get current marker position
     let markerPos = L.marker([latitude, longitude]).getLatLng();
     //Check if current marker is within the circle
@@ -285,9 +296,13 @@ function createMarkers (latitude, longitude, title, street_address){
         .addTo(markerGroup)
         .addTo(map)
         .on('click', function() { updateRoute(markerPos);
-            createDescription(title, street_address); })
+            createDescription(title, street_address, desc, web);
+            openSide();})
         .bindPopup(`${title} ${"<br>"} ${street_address}`)
         .dragging.disable();
     }
 
+}
+function openSide(){
+    document.getElementById("description").style.width = "275px";
 }

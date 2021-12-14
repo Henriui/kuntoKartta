@@ -77,10 +77,19 @@ function changeSearchTerm(newSearchMyHelsinki, newSearchHRI){
 
 //Create map
 const map = L.map('map',{
-    center: [60.22, 24], zoom:12,zoomControl:false
+    center: [60.22, 24], zoom:12,zoomControl:false, closePopupOnClick:true
 });
 //navigaation siirto ala-oikealle
 L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+//Close navigation and description bars on null click
+map.on('popupclose', function(){
+    //console.log('Null click on map')
+    description.style.width = null; //Clear style on description element
+    description.style.padding = null; //Clear style on description element
+    description.innerHTML = ""; //Clear all child elements of description field
+    updateRoute(null); //Update route with a null value
+});
 
 //Create tileLayer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -278,7 +287,6 @@ function hriNouto() {
 }
 
 
-
 //Generate markers and current position
 function createMarkers (latitude, longitude, title, street_address, desc, web){
     //Get current marker position
@@ -287,6 +295,7 @@ function createMarkers (latitude, longitude, title, street_address, desc, web){
     let distanceFromCircle = map.distance(markerPos, circle.getLatLng());
     //True if within
     let isInside = distanceFromCircle < circle.getRadius();
+
 
     if(isInside)
     {
@@ -301,6 +310,9 @@ function createMarkers (latitude, longitude, title, street_address, desc, web){
         .bindPopup(`${title} ${"<br>"} ${street_address}`)
         .dragging.disable();
     }
+
+
+
 
 
 

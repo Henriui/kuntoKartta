@@ -138,3 +138,16 @@ Sivupainike ja sen menu
     white-space: pre-wrap;
     padding: 0px;
 }
+#description a{
+    background-image: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,50,0.5));
+    background:  #37c0f0;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    color: white;
+}
+#description a:hover{
+    background-color: #50c8aa;
+    color: #fff;
+}

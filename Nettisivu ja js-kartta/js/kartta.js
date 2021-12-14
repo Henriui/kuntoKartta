@@ -150,11 +150,21 @@ function createDescription(title, address, desc, web){
     let descField = document.createElement('p');
     let webField = document.createElement('a');
 
-    nameField.innerHTML = title;
-    addressField.innerHTML = address;
-    descField.innerHTML = desc;
-    webField.href = web;
-    webField.innerText = "Nettisivuille";
+    if (title != null){nameField.innerHTML = title;}
+    else{nameField.innerHTML = "";}
+
+    if (address != null){addressField.innerHTML = address;}
+    else{addressField.innerHTML = "";}
+
+    if (desc != null){addressField.innerHTML = desc;}
+    else{descField.innerHTML = "";}
+
+    if (web != null){
+        webField.href = web;
+        webField.innerText = "Nettisivuille";}
+    else{webField.innerText = "Ei nettisivuja";
+    webField.style = "color:black";}
+
     //Add elements as child
 
     description.appendChild(nameField);

@@ -1,35 +1,5 @@
 'use strict';
-/*
-Projekti
 
-- aihe vapaa
-    - jos ei keksi annetaan aihe
-- Vaatimukset
-    - Validi HTML + CSS
-    - JavaScript
-    - Kartta
-        - Markkerien lisääminen
-        - Reititys?
-    - vähintään 1 (avoin) rajapinta, ei kaupallisia
-    - Reagoidaan käyttäjän toimintoihin (interaktiivisuus)
-    - Media
-        - Käyttöliittymän kuvat
-        - Sivulle upotettu video äänillä
-        - Tekijöiden kuvat
-            - kuvat kansio voidaan laittaa salasanan taakse?
-    - Julkaistaan palvelimella
- */
-
-/*
-Jotkin avoimet rajapinnat aiheuttavat selaimessa CORS-virheitä.
-Ne voidaan ohittaa käyttämällä välityspalvelinta kuten esim.
-cors anywhere: https://cors-anywhere.herokuapp.com/
-
-Ohje:
-Lisää ennen fetch-komentoa muuttuja const proxy
-= 'https://cors-anywhere.herokuapp.com/';
-Lisää ko. muuttuja haun eteen: `fetch(${proxy}https://open-api.myhelsinki.fi/jne......
- */
 const baseURLMyHelsinki = 'https://open-api.myhelsinki.fi/'; //MyHelsinki BaseURL
 const baseURLHRI = 'https://www.hel.fi/palvelukarttaws/rest/v4/unit/?search=';
 const tagSearch = 'v2/places/?tags_search='; //MyHelsinki tag_search term
@@ -40,11 +10,7 @@ let searchTermHRI = hriDefaultSearch; //By default HRI search is for sports in g
 let userLocation = []; //User location
 const userPosIcon = L.divIcon({className: 'user-pos-icon'});
 const customIcon = L.divIcon({className: 'custom-icon'});
-
 const description = document.querySelector('#description'); //Get description section from kartta.html
-
-//Create a custom marker
-//Koodi tänne
 
 startSearch(); //Call startSearch function on start
 
@@ -336,11 +302,6 @@ function createMarkers (latitude, longitude, title, street_address, desc, web){
         .bindPopup(`${title} ${"<br>"} ${street_address}`)
         .dragging.disable();
     }
-
-
-
-
-
 
 }
 

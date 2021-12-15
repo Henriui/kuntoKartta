@@ -38,6 +38,8 @@ const hriDefaultSearch = 'liikunta+helsinki'; //Default search term for HRI
 let searchTermMyHelsinki = myHelsinkiDefaultSearch; //By default MyHelsinki search is for sports in general
 let searchTermHRI = hriDefaultSearch; //By default HRI search is for sports in general
 let userLocation = []; //User location
+const userPosIcon = L.divIcon({className: 'user-pos-icon'});
+const customIcon = L.divIcon({className: 'custom-icon'});
 
 const description = document.querySelector('#description'); //Get description section from kartta.html
 
@@ -119,7 +121,7 @@ let routingControl = L.Routing.control({
 let updateRoute = function(toPos){
     routingControl.getPlan().setWaypoints([
         L.latLng(userLocation),
-        L.latLng(toPos)
+        L.latLng(toPos),
     ]);
 };
 
@@ -325,7 +327,7 @@ function createMarkers (latitude, longitude, title, street_address, desc, web){
     {
         console.log('Success');
         // noinspection JSVoidFunctionReturnValueUsed
-        let mark = L.marker([latitude, longitude])
+        let mark = L.marker([latitude, longitude], {icon: customIcon})
         .addTo(markerGroup)
         .addTo(map)
         .on('click', function() {

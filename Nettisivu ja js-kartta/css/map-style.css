@@ -152,3 +152,22 @@ Sivupainike ja sen menu
     background-color: #50c8aa;
     color: #fff;
 }
+
+/* leaflet ikonit */
+.custom-icon {
+    background: #37c0f0;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 30px;
+}
+
+.user-pos-icon {
+    background: #50c8aa;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 30px;
+}
